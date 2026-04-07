@@ -1,0 +1,38 @@
+name: build-custom-geo
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'dist/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build geosite.dat and geoip.dat
+        run: python3 scripts/build.py
+      - name: Commit generated dat files
+        run: |
+          if git diff --quiet -- dist; then
+            echo 'No dist changes'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/geosite.dat dist/geoip.dat
+          git commit -m 'build: refresh dat files [skip ci]'
+          git push
