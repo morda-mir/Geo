@@ -1,11 +1,11 @@
 # Current status
 
-## Production-safe for desktop Happ
+## Production-safe setup
 
-Use:
+Use only the URLs from this repository:
 
 - `Geositeurl`: `https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat`
-- `Geoipurl`: `https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat`
+- `Geoipurl`: `https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat`
 
 Working categories:
 
@@ -17,14 +17,14 @@ Working categories:
 
 ## Important note
 
-The custom `dist/geoip.dat` currently works on some mobile clients, but desktop Happ rejects it as invalid.
-So for desktop Happ, use external `runetfreedom` geoip until a fully compatible custom geoip build is found.
+The production `dist/geoip.dat` is mirrored into this repository for desktop Happ compatibility.
+It is not the same thing as the legacy custom geoip experiments in this repo.
 
 ## Recommended desktop Happ routing profile
 
 ```json
 {
-  "Geoipurl": "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat",
+  "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
   "DirectSites": [],
   "DirectIp": ["geoip:private"],

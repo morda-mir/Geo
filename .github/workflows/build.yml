@@ -3,8 +3,11 @@ name: build-custom-geo
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - 'dist/**'
+    paths:
+      - 'src/geosite/**'
+      - 'build_morda_geo.py'
+      - 'scripts/build.py'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 permissions:
@@ -24,16 +27,16 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - name: Build geosite.dat and geoip.dat
+      - name: Build geosite.dat only
         run: python3 scripts/build.py
-      - name: Commit generated dat files
+      - name: Commit generated geosite.dat
         run: |
-          if git diff --quiet -- dist; then
-            echo 'No dist changes'
+          if git diff --quiet -- dist/geosite.dat; then
+            echo 'No geosite changes'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add dist/geosite.dat dist/geoip.dat
-          git commit -m 'build: refresh dat files [skip ci]'
+          git add dist/geosite.dat
+          git commit -m 'build: refresh geosite.dat [skip ci]'
           git push
