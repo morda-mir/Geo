@@ -1,0 +1,116 @@
+# Telegram
+# kept almost full from upstream because category is already small and clean
+domain:cdn-telegram.org
+domain:comments.app
+domain:contest.com
+domain:fragment.com
+domain:graph.org
+domain:quiz.directory
+domain:t.me
+domain:tdesktop.com
+domain:telega.one
+domain:telegra.ph
+domain:telegram-cdn.org
+domain:telegram.dog
+domain:telegram.me
+domain:telegram.org
+domain:telegram.space
+domain:telesco.pe
+domain:tg.dev
+domain:ton.org
+domain:tx.me
+domain:usercontent.dev
+
+# WhatsApp
+# intentionally trimmed: no whatsapp-plus / brand noise
+domain:wa.me
+domain:whatsapp.com
+domain:whatsapp.net
+
+# YouTube
+# intentionally trimmed: no country mirrors / no marketing domains
+domain:youtube.com
+domain:youtu.be
+domain:ytimg.com
+domain:googlevideo.com
+full:youtubei.googleapis.com
+full:youtube.googleapis.com
+full:youtubeembeddedplayer.googleapis.com
+full:yt3.googleusercontent.com
+domain:youtube-nocookie.com
+
+# Instagram / Facebook
+# intentionally trimmed: no typo / squat / marketing domains
+domain:instagram.com
+domain:cdninstagram.com
+domain:ig.me
+domain:igcdn.com
+domain:facebook.com
+domain:facebook.net
+domain:fb.com
+domain:fb.me
+domain:fb.watch
+domain:fbcdn.net
+domain:fbsbx.com
+
+# Discord
+# intentionally trimmed: no joke / merch / status side domains
+domain:dis.gd
+domain:discord.com
+domain:discord.gg
+domain:discord.media
+domain:discordapp.com
+domain:discordapp.net
+domain:discordcdn.com
+full:discord-attachments-uploads-prd.storage.googleapis.com
+
+# OpenAI / ChatGPT
+# intentionally trimmed: keep core product + known delivery endpoints
+domain:chat.com
+domain:chatgpt.com
+domain:oaiusercontent.com
+domain:oaistatic.com
+domain:openai.com
+domain:sora.com
+full:chatgpt.livekit.cloud
+full:host.livekit.cloud
+full:turn.livekit.cloud
+full:openai.com.cdn.cloudflare.net
+full:openaiapi-site.azureedge.net
+full:openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+full:openaicom.imgix.net
+full:openaicomproductionae4b.blob.core.windows.net
+full:production-openaicom-storage.azureedge.net
+
+# Anthropic / Claude
+domain:anthropic.com
+domain:clau.de
+domain:claude.ai
+domain:claude.com
+domain:claudeusercontent.com
+
+# Gemini / Google AI
+# intentionally exact-only for googleapis endpoints to avoid broad google proxying
+full:ai.google.dev
+full:ai.studio
+full:aistudio.google.com
+full:alkalicore-pa.clients6.google.com
+full:alkalimakersuite-pa.clients6.google.com
+full:antigravity-pa.googleapis.com
+full:antigravity.googleapis.com
+full:bard.google.com
+full:cloudaicompanion.googleapis.com
+full:cloudcode-pa.googleapis.com
+full:daily-cloudcode-pa.googleapis.com
+domain:deepmind.com
+full:deepmind.google
+full:gemini.google.com
+full:generativeai.google
+full:jules.google.com
+full:labs.google.com
+full:makersuite.google.com
+full:notebooklm.google.com
+full:notebooklm-pa.googleapis.com
+full:notebooklm.googleapis.com
+full:robinfrontend-pa.googleapis.com
+full:webchannel-alkalimakersuite-pa.clients6.google.com
