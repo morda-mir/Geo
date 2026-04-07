@@ -1,0 +1,21 @@
+# lightweight ad / tracker blocklist only
+# intentionally small to reduce breakage and keep dat tiny
+domain:doubleclick.net
+domain:googleadservices.com
+domain:googlesyndication.com
+domain:googletagmanager.com
+domain:googletagservices.com
+domain:google-analytics.com
+full:ads.youtube.com
+full:analytics.facebook.com
+full:pixel.facebook.com
+domain:amazon-adsystem.com
+domain:scorecardresearch.com
+domain:taboola.com
+domain:taboolasyndication.com
+domain:outbrain.com
+domain:criteo.com
+domain:criteo.net
+domain:adnxs.com
+domain:rubiconproject.com
+domain:pubmatic.com
