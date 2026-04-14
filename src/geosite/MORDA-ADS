@@ -1,12 +1,25 @@
 # lightweight ad / tracker blocklist only
 # intentionally small to reduce breakage and keep dat tiny
 domain:doubleclick.net
+domain:doubleclick.com
 domain:googleadservices.com
 domain:googlesyndication.com
 domain:googletagmanager.com
 domain:googletagservices.com
 domain:google-analytics.com
+
 full:ads.youtube.com
+full:s.youtube.com
+full:youtubeanalytics.googleapis.com
+full:pagead2.googlesyndication.com
+full:googleads.g.doubleclick.net
+full:pubads.g.doubleclick.net
+full:securepubads.g.doubleclick.net
+full:static.doubleclick.net
+full:ad.doubleclick.net
+full:fls.doubleclick.net
+full:partnerad.l.doubleclick.net
+
 full:analytics.facebook.com
 full:pixel.facebook.com
 domain:amazon-adsystem.com
