@@ -1,7 +1,7 @@
-# broad direct list for RU / local services that often detect VPN or work better without it
-# intentionally kept as one category to stay simple in Happ / Xray routing
+# broad direct list for RU / local services that often detect VPN or work better without proxy
+# intentionally flattened into a single category to keep maintenance simple
 
-# State / civic services
+# State auth / public services
 domain:gosuslugi.ru
 domain:gu-st.ru
 full:myschool.mosreg.ru
@@ -12,6 +12,7 @@ domain:government.ru
 domain:kremlin.ru
 domain:duma.gov.ru
 domain:digital.gov.ru
+domain:genproc.gov.ru
 domain:cikrf.ru
 domain:izbirkom.ru
 
@@ -24,73 +25,91 @@ domain:tbank.ru
 domain:tinkoff.ru
 domain:cdn-tinkoff.ru
 
-# Marketplaces / classifieds / shopping
+# Marketplaces / commerce / delivery
 domain:ozon.ru
 domain:ozone.ru
-domain:wildberries.ru
 domain:wb.ru
+domain:wildberries.ru
 domain:wbstatic.net
 domain:wbbasket.ru
 domain:avito.ru
 domain:avito.st
-domain:cian.ru
-domain:hh.ru
-domain:headhunter.ru
-domain:zarplata.ru
 domain:lamoda.ru
-domain:vkusvill.ru
-domain:vseinstrumenty.ru
-domain:lenta.com
-domain:lenta.ru
+domain:lemanapro.ru
+domain:lmru.tech
+domain:megamarket.ru
+domain:magnit.ru
+domain:magnit-market.ru
 domain:perekrestok.ru
 domain:5ka.ru
 domain:pyaterochka.ru
 domain:chizhik.ru
-domain:magnit.ru
-domain:magnit-market.ru
-domain:megamarket.ru
-domain:lemanapro.ru
-domain:lmru.tech
+domain:vkusvill.ru
+domain:vseinstrumenty.ru
+domain:lenta.com
+domain:x5.ru
+domain:beru.ru
 
-# Transport / local utility services
+# Transport / maps / jobs / local utilities
 domain:rzd.ru
 domain:tutu.ru
 domain:2gis.ru
 domain:2gis.com
-domain:t2.ru
+domain:cian.ru
+domain:hh.ru
+domain:headhunter.ru
+domain:zarplata.ru
 domain:gismeteo.ru
 domain:gismeteo.com
+domain:max.ru
+domain:taximaxim.ru
 
-# Local ecosystems / social / media
-# broad on purpose: these families often use local auth, anti-fraud and region-sensitive edges
+# Local portals / ecosystems
 domain:yandex.ru
-domain:ya.ru
 domain:yandex.net
 domain:yandex.com
+domain:ya.ru
 domain:yastatic.net
 domain:dzen.ru
 domain:auto.ru
 domain:mail.ru
+domain:oneme.ru
 domain:vk.ru
 domain:vk.com
 domain:vk-portal.net
 domain:cdn-vk.ru
-domain:userapi.com
 domain:ok.ru
 domain:okcdn.ru
-domain:rutube.ru
-domain:kinopoisk.ru
-domain:max.ru
+domain:userapi.com
 
-# Local streaming / content platforms
+# Media / news / streaming / content
+domain:rambler.ru
+domain:lenta.ru
+domain:gazeta.ru
+domain:rbc.ru
+domain:kp.ru
+domain:47news.ru
+domain:rutube.ru
+domain:rutubelist.ru
+domain:kinopoisk.ru
 domain:ivi.ru
-domain:okko.ru
-domain:okko.tv
 domain:kion.ru
+domain:okko.tv
+domain:okko.ru
 domain:wink.ru
+full:wink.rt.ru
 domain:premier.one
-domain:music.mts.ru
 domain:mts-tv.ru
+domain:music.mts.ru
 domain:ottplay.ru
 domain:yappy.ru
+domain:tnt-online.ru
+domain:ctc.ru
+domain:domashny.ru
+domain:friday.ru
+domain:ntv.ru
+domain:gpmd.ru
+domain:vi.ru
+domain:2x2tv.ru
 domain:litres.ru
+domain:digitalaccess.ru
