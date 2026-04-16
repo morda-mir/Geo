@@ -16,6 +16,7 @@ Clients should use only this repository for both URLs:
 
 ## Production categories
 
+- `geosite:MORDA-DIRECT`
 - `geosite:MORDA-PROXY`
 - `geosite:MORDA-ADS`
 - `geosite:MORDA-DISCORD-EXTRA`
@@ -28,7 +29,7 @@ Clients should use only this repository for both URLs:
 {
   "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
-  "DirectSites": [],
+  "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": ["geoip:telegram"],
