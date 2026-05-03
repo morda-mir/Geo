@@ -97,8 +97,10 @@ domain:onetrust.com
 domain:ingest.sentry.io
 full:geolocation.onetrust.com
 
-# Apple Game Center endpoints observed near Brawl Stars startup
+# Apple Game Center / startup endpoints observed near Brawl Stars startup
 domain:gc.apple.com
+domain:ls.apple.com
+full:gateway.icloud.com
 
 # Roblox
 domain:blox.com
