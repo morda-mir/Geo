@@ -1,0 +1,3 @@
+# Brawl Stars game server IPs observed without sniffed domain.
+# Keep CIDRs narrow and only add addresses confirmed from Happ/Xray logs.
+44.241.61.155/32
