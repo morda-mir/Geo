@@ -4,10 +4,10 @@ Custom geo repo for Xray / RemnaWave / Happ.
 
 ## Production model
 
-This repository is split into two independent parts:
+This repository has two production outputs:
 
 - `dist/geosite.dat` is built from the small custom sources in `src/geosite/`
-- `dist/geoip.dat` is synced into this repository by workflow for desktop Happ compatibility
+- `dist/geoip.dat` is built by mirroring the upstream production geoip file and appending custom categories from `src/geoip/`
 
 Clients should use only this repository for both URLs:
 
@@ -22,6 +22,7 @@ Clients should use only this repository for both URLs:
 - `geosite:MORDA-DISCORD-EXTRA`
 - `geoip:private`
 - `geoip:telegram`
+- `geoip:MORDA-BRAWLSTARS`
 
 ## Recommended desktop Happ routing profile
 
@@ -32,21 +33,30 @@ Clients should use only this repository for both URLs:
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
 ```
 
+## Brawl Stars routing
+
+Brawl Stars uses both domain-based Supercell endpoints and IP-only game server connections.
+
+- domains are routed via `geosite:MORDA-PROXY`
+- observed IP-only game server addresses are routed via `geoip:MORDA-BRAWLSTARS`
+
+Keep Brawl Stars IP entries narrow (`/32`) and only add addresses confirmed from Happ/Xray logs.
+
 ## Workflows
 
-- `build-custom-geo` rebuilds only `dist/geosite.dat` from `src/geosite/`
-- `sync-production-geoip` refreshes `dist/geoip.dat` inside this repository
+- `build-custom-geo` rebuilds `dist/geosite.dat` from `src/geosite/`
+- `sync-production-geoip` refreshes upstream `geoip.dat`, appends custom categories from `src/geoip/`, and writes `dist/geoip.dat`
 
 ## Source layout
 
 - `src/geosite/` is the source of truth for the custom geosite categories
-- `src/geoip/telegram-ip.txt` is kept only as reference / legacy input and is not the current production source for `dist/geoip.dat`
+- `src/geoip/` is the source of truth for custom geoip categories appended to production `dist/geoip.dat`
 
 ## Experimental / legacy
 
