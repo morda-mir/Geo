@@ -89,6 +89,13 @@ domain:supercell.helpshift.com
 domain:supercell-support.helpshift.com
 full:api.helpshift.com
 
+# Consent / analytics / region checks observed near game startup
+domain:usercentrics.eu
+domain:service.usercentrics.eu
+domain:app-analytics-services.com
+domain:onetrust.com
+full:geolocation.onetrust.com
+
 # Roblox
 domain:blox.com
 domain:goblocks.com
@@ -176,6 +183,7 @@ full:antigravity.googleapis.com
 full:bard.google.com
 full:cloudaicompanion.googleapis.com
 full:cloudcode-pa.googleapis.com
+full:cloudcode.googleapis.com
 full:daily-cloudcode-pa.googleapis.com
 domain:deepmind.com
 full:deepmind.google
