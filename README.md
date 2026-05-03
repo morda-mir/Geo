@@ -23,6 +23,7 @@ Clients should use only this repository for both URLs:
 - `geoip:private`
 - `geoip:telegram`
 - `geoip:MORDA-BRAWLSTARS`
+- `geoip:MORDA-ROBLOX`
 
 ## Recommended desktop Happ routing profile
 
@@ -33,7 +34,7 @@ Clients should use only this repository for both URLs:
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
@@ -47,6 +48,13 @@ Brawl Stars uses both domain-based Supercell endpoints and IP-only game server c
 - observed IP-only game server addresses are routed via `geoip:MORDA-BRAWLSTARS`
 
 Keep Brawl Stars IP entries narrow (`/32`) and only add addresses confirmed from Happ/Xray logs.
+
+## Roblox routing
+
+Roblox uses both domain-based endpoints and game/server IP ranges.
+
+- domains are routed via `geosite:MORDA-PROXY`
+- known Roblox IP ranges are routed via `geoip:MORDA-ROBLOX`
 
 ## Workflows
 
