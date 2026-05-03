@@ -94,6 +94,7 @@ domain:usercentrics.eu
 domain:service.usercentrics.eu
 domain:app-analytics-services.com
 domain:onetrust.com
+domain:ingest.sentry.io
 full:geolocation.onetrust.com
 
 # Apple Game Center endpoints observed near Brawl Stars startup
