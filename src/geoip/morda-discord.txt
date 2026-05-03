@@ -1,0 +1,10 @@
+# Discord IP ranges from public rule-set candidates.
+# Keep this list narrow; avoid broad Cloudflare/Google ranges unless confirmed by logs.
+5.200.14.128/25
+35.208.0.0/24
+35.213.98.0/24
+64.71.8.96/29
+66.22.192.0/18
+138.128.136.0/21
+188.244.120.0/24
+195.62.89.0/24
