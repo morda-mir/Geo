@@ -14,11 +14,11 @@ Working categories:
 - `geosite:MORDA-DISCORD-EXTRA`
 - `geoip:private`
 - `geoip:telegram`
+- `geoip:MORDA-BRAWLSTARS`
 
 ## Important note
 
-The production `dist/geoip.dat` is mirrored into this repository for desktop Happ compatibility.
-It is not the same thing as the legacy custom geoip experiments in this repo.
+The production `dist/geoip.dat` is mirrored from the upstream production geoip file and extended with custom categories from `src/geoip/` for desktop Happ compatibility.
 
 ## Recommended desktop Happ routing profile
 
@@ -26,10 +26,10 @@ It is not the same thing as the legacy custom geoip experiments in this repo.
 {
   "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
-  "DirectSites": [],
+  "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
