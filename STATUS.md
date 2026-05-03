@@ -15,6 +15,7 @@ Working categories:
 - `geoip:private`
 - `geoip:telegram`
 - `geoip:MORDA-BRAWLSTARS`
+- `geoip:MORDA-ROBLOX`
 
 ## Important note
 
@@ -29,7 +30,7 @@ The production `dist/geoip.dat` is mirrored from the upstream production geoip f
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
