@@ -24,6 +24,7 @@ Clients should use only this repository for both URLs:
 - `geoip:telegram`
 - `geoip:MORDA-BRAWLSTARS`
 - `geoip:MORDA-ROBLOX`
+- `geoip:MORDA-DISCORD`
 
 ## Recommended desktop Happ routing profile
 
@@ -34,7 +35,7 @@ Clients should use only this repository for both URLs:
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX", "geoip:MORDA-DISCORD"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
@@ -55,6 +56,13 @@ Roblox uses both domain-based endpoints and game/server IP ranges.
 
 - domains are routed via `geosite:MORDA-PROXY`
 - known Roblox IP ranges are routed via `geoip:MORDA-ROBLOX`
+
+## Discord routing
+
+Discord uses domain-based endpoints and some voice/media IP ranges.
+
+- domains are routed via `geosite:MORDA-PROXY` and `geosite:MORDA-DISCORD-EXTRA`
+- known Discord voice/media IP ranges are routed via `geoip:MORDA-DISCORD`
 
 ## Workflows
 
