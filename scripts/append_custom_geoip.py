@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import ipaddress
 import shutil
 import subprocess
 import tempfile
@@ -12,26 +11,20 @@ DIST = ROOT / 'dist'
 UPSTREAM_GEOIP = DIST / 'geoip.upstream.dat'
 OUTPUT_GEOIP = DIST / 'geoip.dat'
 
-GEOIP_PB_GO = '''syntax = "proto3";
-package geoip;
-option go_package = "github.com/v2fly/v2ray-core/v5/app/router/routercommon";
-message CIDR { bytes ip = 1; uint32 prefix = 2; }
-message GeoIP { string country_code = 1; repeated CIDR cidr = 2; bool reverse_match = 3; }
-message GeoIPList { repeated GeoIP entry = 1; }
-'''
-
 GO_MOD = '''module morda-geoip-append
 
 go 1.24
 
-require google.golang.org/protobuf v1.36.10
+require (
+    github.com/v2fly/v2ray-core/v5 v5.39.0
+    google.golang.org/protobuf v1.36.10
+)
 '''
 
 GO_MAIN = '''package main
 
 import (
     "bufio"
-    "bytes"
     "fmt"
     "net/netip"
     "os"
@@ -39,12 +32,9 @@ import (
     "sort"
     "strings"
 
+    routercommon "github.com/v2fly/v2ray-core/v5/app/router/routercommon"
     "google.golang.org/protobuf/proto"
-    "google.golang.org/protobuf/types/known/emptypb"
 )
-
-// Placeholder import guard for generated protobuf package path in this temp module.
-var _ = emptypb.Empty{}
 
 func parseCIDR(line string) (netip.Prefix, bool, error) {
     line = strings.TrimSpace(line)
@@ -53,6 +43,9 @@ func parseCIDR(line string) (netip.Prefix, bool, error) {
     }
     if i := strings.Index(line, "#"); i >= 0 {
         line = strings.TrimSpace(line[:i])
+    }
+    if line == "" {
+        return netip.Prefix{}, false, nil
     }
     prefix, err := netip.ParsePrefix(line)
     if err != nil {
@@ -70,31 +63,39 @@ func main() {
     outputPath := os.Args[3]
 
     data, err := os.ReadFile(upstreamPath)
-    if err != nil { panic(err) }
+    if err != nil {
+        panic(err)
+    }
 
-    list := &GeoIPList{}
-    if err := proto.Unmarshal(data, list); err != nil { panic(err) }
+    list := &routercommon.GeoIPList{}
+    if err := proto.Unmarshal(data, list); err != nil {
+        panic(err)
+    }
 
-    entriesByCode := map[string]*GeoIP{}
+    entriesByCode := map[string]*routercommon.GeoIP{}
     for _, entry := range list.Entry {
         entriesByCode[strings.ToUpper(entry.CountryCode)] = entry
     }
 
     files, err := filepath.Glob(filepath.Join(srcDir, "*.txt"))
-    if err != nil { panic(err) }
+    if err != nil {
+        panic(err)
+    }
     sort.Strings(files)
 
     for _, file := range files {
         code := strings.ToUpper(strings.TrimSuffix(filepath.Base(file), filepath.Ext(file)))
         entry := entriesByCode[code]
         if entry == nil {
-            entry = &GeoIP{CountryCode: code}
+            entry = &routercommon.GeoIP{CountryCode: code}
             entriesByCode[code] = entry
             list.Entry = append(list.Entry, entry)
         }
 
         f, err := os.Open(file)
-        if err != nil { panic(err) }
+        if err != nil {
+            panic(err)
+        }
         scanner := bufio.NewScanner(f)
         for scanner.Scan() {
             prefix, ok, err := parseCIDR(scanner.Text())
@@ -102,14 +103,16 @@ func main() {
                 f.Close()
                 panic(fmt.Errorf("%s: %w", file, err))
             }
-            if !ok { continue }
+            if !ok {
+                continue
+            }
             addr := prefix.Addr()
             if addr.Is4() {
                 ip4 := addr.As4()
-                entry.Cidr = append(entry.Cidr, &CIDR{Ip: ip4[:], Prefix: uint32(prefix.Bits())})
+                entry.Cidr = append(entry.Cidr, &routercommon.CIDR{Ip: ip4[:], Prefix: uint32(prefix.Bits())})
             } else if addr.Is6() {
                 ip16 := addr.As16()
-                entry.Cidr = append(entry.Cidr, &CIDR{Ip: ip16[:], Prefix: uint32(prefix.Bits())})
+                entry.Cidr = append(entry.Cidr, &routercommon.CIDR{Ip: ip16[:], Prefix: uint32(prefix.Bits())})
             }
         }
         if err := scanner.Err(); err != nil {
@@ -120,11 +123,12 @@ func main() {
     }
 
     out, err := proto.MarshalOptions{Deterministic: true}.Marshal(list)
-    if err != nil { panic(err) }
-    if bytes.Equal(out, data) {
-        fmt.Println("No custom geoip changes")
+    if err != nil {
+        panic(err)
     }
-    if err := os.WriteFile(outputPath, out, 0644); err != nil { panic(err) }
+    if err := os.WriteFile(outputPath, out, 0644); err != nil {
+        panic(err)
+    }
 }
 '''
 
@@ -143,11 +147,8 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix='morda-geoip-') as tmp:
         work = Path(tmp)
         (work / 'go.mod').write_text(GO_MOD)
-        (work / 'geoip.proto').write_text(GEOIP_PB_GO)
         (work / 'main.go').write_text(GO_MAIN)
-        run(['go', 'install', 'google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.10'])
         run(['go', 'mod', 'download'], cwd=work)
-        run(['protoc', '--go_out=.', '--go_opt=paths=source_relative', 'geoip.proto'], cwd=work)
         run(['go', 'run', '.', str(UPSTREAM_GEOIP), str(SRC_GEOIP), str(OUTPUT_GEOIP)], cwd=work)
 
 
