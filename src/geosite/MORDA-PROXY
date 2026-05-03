@@ -64,6 +64,18 @@ domain:discordapp.net
 domain:discordcdn.com
 full:discord-attachments-uploads-prd.storage.googleapis.com
 
+# Supercell / Brawl Stars
+domain:supercell.com
+domain:supercell.net
+domain:supercellgames.com
+domain:brawlstars.com
+domain:clashroyale.com
+domain:clashofclans.com
+domain:boombeach.com
+domain:haydaygame.com
+domain:supercell.helpshift.com
+domain:supercell-support.helpshift.com
+
 # OpenAI / ChatGPT
 # intentionally trimmed: keep core product + known delivery endpoints
 domain:chat.com
