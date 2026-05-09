@@ -64,6 +64,10 @@ domain:gismeteo.com
 domain:max.ru
 domain:taximaxim.ru
 
+# Fuel / loyalty / local app SDKs
+domain:gpnbonus.ru
+domain:inappstory.ru
+
 # Local portals / ecosystems
 domain:yandex.ru
 domain:yandex.net
