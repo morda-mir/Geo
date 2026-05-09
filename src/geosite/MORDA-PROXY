@@ -163,6 +163,8 @@ domain:sora.com
 full:chatgpt.livekit.cloud
 full:host.livekit.cloud
 full:turn.livekit.cloud
+full:http-intake.logs.datadoghq.com
+full:http-intake-l4.logs.datadoghq.com
 full:openai.com.cdn.cloudflare.net
 full:openaiapi-site.azureedge.net
 full:openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
