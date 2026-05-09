@@ -15,6 +15,12 @@ domain:digital.gov.ru
 domain:genproc.gov.ru
 domain:cikrf.ru
 domain:izbirkom.ru
+domain:nalog.ru
+domain:rosreestr.gov.ru
+domain:fssp.gov.ru
+domain:zakupki.gov.ru
+domain:mos.ru
+domain:mosreg.ru
 
 # Banking / fintech
 domain:alfabank.ru
@@ -24,6 +30,12 @@ domain:vtb.ru
 domain:tbank.ru
 domain:tinkoff.ru
 domain:cdn-tinkoff.ru
+domain:mironline.ru
+domain:nspk.ru
+domain:paymentcard.ru
+domain:gazprombank.ru
+domain:gazprombank.investments
+domain:gazprom-pay.ru
 
 # Marketplaces / commerce / delivery
 domain:ozon.ru
@@ -49,12 +61,20 @@ domain:vseinstrumenty.ru
 domain:lenta.com
 domain:x5.ru
 domain:beru.ru
+domain:samokat.ru
+domain:kuper.ru
+domain:sbermarket.ru
+domain:delivery-club.ru
+domain:dostavista.ru
 
 # Transport / maps / jobs / local utilities
 domain:rzd.ru
 domain:tutu.ru
 domain:2gis.ru
 domain:2gis.com
+domain:doublegis.com
+domain:dgis.com
+domain:dgiscdn.ru
 domain:cian.ru
 domain:hh.ru
 domain:headhunter.ru
@@ -63,9 +83,23 @@ domain:gismeteo.ru
 domain:gismeteo.com
 domain:max.ru
 domain:taximaxim.ru
+domain:delimobil.ru
+domain:citydrive.ru
+domain:urent.ru
+
+# Mobile operators
+domain:mts.ru
+domain:beeline.ru
+domain:megafon.ru
+domain:tele2.ru
+domain:t2.ru
+domain:yota.ru
+domain:motivtelecom.ru
 
 # Fuel / loyalty / local app SDKs
 domain:gpnbonus.ru
+domain:gpn-card.ru
+domain:gazprom-neft.ru
 domain:inappstory.ru
 
 # Local portals / ecosystems
