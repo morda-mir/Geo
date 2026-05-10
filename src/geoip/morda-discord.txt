@@ -2,6 +2,12 @@
 # Main source: nDPI generated Discord network list + public Discord voice/media lists.
 # Keep domain routing in geosite:MORDA-PROXY and geosite:MORDA-DISCORD-EXTRA.
 # Cloudflare media candidates are intentionally narrow public voice/media ranges, not whole Cloudflare.
+3.233.158.24/32
+3.233.158.25/32
+3.233.158.26/32
+3.233.158.111/32
+3.233.158.112/32
+3.233.158.114/32
 5.180.216.0/22
 5.200.0.0/19
 31.204.128.0/19
