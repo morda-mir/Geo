@@ -79,3 +79,21 @@
 213.163.64.0/19
 213.179.192.0/19
 213.190.22.0/24
+
+# Observed Discord voice/media endpoints from Happ/Xray logs on 2026-05-10.
+# These /32 entries are intentionally redundant with the broader Cloudflare
+# candidates above, so future list trimming does not accidentally remove voice.
+104.29.154.195/32
+104.29.154.196/32
+104.29.158.35/32
+104.29.159.157/32
+162.159.128.235/32
+162.159.129.235/32
+162.159.130.234/32
+162.159.130.235/32
+162.159.133.234/32
+162.159.134.234/32
+162.159.135.234/32
+162.159.136.234/32
+162.159.137.234/32
+162.159.138.234/32
