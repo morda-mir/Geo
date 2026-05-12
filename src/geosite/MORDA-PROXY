@@ -186,6 +186,18 @@ domain:claudeusercontent.com
 domain:claudemcpclient.com
 full:servd-anthropic-website.b-cdn.net
 
+# AI billing / payments
+# observed from Anthropic/Claude billing and payment flows
+domain:stripe.com
+domain:stripe.network
+domain:stripe.global
+domain:link.com
+domain:intercom.io
+domain:intercomcdn.com
+full:pay.google.com
+full:payments.google.com
+full:play.google.com
+
 # Gemini / Google AI
 # intentionally exact-only for googleapis endpoints to avoid broad google proxying
 full:ai.google.dev
@@ -288,7 +300,6 @@ domain:coze.com
 domain:marscode.com
 domain:trae.ai
 domain:cici.com
-domain:ciciai.com
 domain:ciciaicdn.com
 domain:dola.com
 
