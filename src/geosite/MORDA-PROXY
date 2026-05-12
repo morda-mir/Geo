@@ -187,13 +187,34 @@ domain:claudemcpclient.com
 full:servd-anthropic-website.b-cdn.net
 
 # AI billing / payments
-# observed from Anthropic/Claude billing and payment flows
+# observed from Anthropic/Claude billing and common AI subscription flows
 domain:stripe.com
 domain:stripe.network
 domain:stripe.global
 domain:link.com
+domain:paddle.com
+domain:paddleapi.com
+domain:paddlecdn.com
+domain:paypal.com
+domain:paypalobjects.com
+domain:braintreepayments.com
+domain:braintreegateway.com
+domain:braintree-api.com
+domain:adyen.com
+domain:adyenpayments.com
+domain:checkout.com
+domain:checkoutcdn.com
+domain:chargebee.com
+domain:recurly.com
+domain:fastspring.com
+domain:lemonsqueezy.com
+domain:polar.sh
+domain:orb.com
+domain:revenuecat.com
 domain:intercom.io
 domain:intercomcdn.com
+domain:intercomassets.com
+domain:intercomusercontent.com
 full:pay.google.com
 full:payments.google.com
 full:play.google.com
