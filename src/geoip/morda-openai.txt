@@ -1,0 +1,14 @@
+# Observed OpenAI / ChatGPT Desktop endpoints from Happ/Xray logs.
+# Domain routing stays in geosite:MORDA-PROXY.
+# Keep these narrow: Cloudflare and Google Cloud IPs are shared infrastructure,
+# so avoid replacing these with broad provider ranges unless logs prove it.
+
+# ChatGPT app startup / API / realtime transport candidates observed on 2026-05-14.
+34.160.81.0/32
+35.190.80.1/32
+
+# chatgpt.com / ws.chatgpt.com Cloudflare edge IPs observed on 2026-05-14.
+104.18.32.47/32
+104.18.39.21/32
+172.64.148.235/32
+172.64.155.209/32
