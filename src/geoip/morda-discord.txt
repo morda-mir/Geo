@@ -15,7 +15,11 @@
 35.213.98.0/24
 
 # Public Discord/ipcall Google Cloud voice/media candidates.
-# Keep these as selected /24 and /32 entries; do not replace with whole 35.217.0.0/16.
+# 35.217.0.0/16 is intentionally broad: repeated Happ/Xray logs show
+# Discord voice UDP landing on changing 35.217.x.x hosts, and adding them one
+# by one is too fragile for end users. Keep explicit /24 and /32 entries below
+# as audit trail for observed/public candidates.
+35.217.0.0/16
 35.217.0.0/24
 35.217.1.0/24
 35.217.2.5/32
@@ -155,6 +159,6 @@
 162.159.138.234/32
 
 # Observed Discord voice UDP endpoints from Happ/Xray logs on 2026-05-14.
-# Covered by broader 35.217.* /24 ranges above; kept explicit for audit trail.
+# Covered by broader 35.217.* ranges above; kept explicit for audit trail.
 35.217.8.44/32
 35.217.34.78/32
