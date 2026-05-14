@@ -47,6 +47,7 @@
 35.217.31.0/24
 35.217.32.164/32
 35.217.33.0/24
+35.217.34.0/24
 35.217.35.0/24
 35.217.36.0/24
 35.217.37.0/24
@@ -153,6 +154,7 @@
 162.159.137.234/32
 162.159.138.234/32
 
-# Observed Discord voice UDP endpoint from Happ/Xray logs on 2026-05-14.
-# Covered by 35.217.8.0/24 above; kept explicit for audit trail.
+# Observed Discord voice UDP endpoints from Happ/Xray logs on 2026-05-14.
+# Covered by broader 35.217.* /24 ranges above; kept explicit for audit trail.
 35.217.8.44/32
+35.217.34.78/32
