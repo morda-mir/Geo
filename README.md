@@ -25,6 +25,7 @@ Clients should use only this repository for both URLs:
 - `geoip:MORDA-BRAWLSTARS`
 - `geoip:MORDA-ROBLOX`
 - `geoip:MORDA-DISCORD`
+- `geoip:MORDA-OPENAI`
 
 ## Recommended desktop Happ routing profile
 
@@ -35,7 +36,7 @@ Clients should use only this repository for both URLs:
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
-  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX", "geoip:MORDA-DISCORD"],
+  "ProxyIp": ["geoip:telegram", "geoip:MORDA-BRAWLSTARS", "geoip:MORDA-ROBLOX", "geoip:MORDA-DISCORD", "geoip:MORDA-OPENAI"],
   "BlockSites": ["geosite:MORDA-ADS"],
   "BlockIp": []
 }
@@ -63,6 +64,15 @@ Discord uses domain-based endpoints and some voice/media IP ranges.
 
 - domains are routed via `geosite:MORDA-PROXY` and `geosite:MORDA-DISCORD-EXTRA`
 - known Discord voice/media IP ranges are routed via `geoip:MORDA-DISCORD`
+
+## OpenAI / ChatGPT routing
+
+ChatGPT uses domain-based endpoints and a few IP-only or post-resolution realtime/API connections.
+
+- domains are routed via `geosite:MORDA-PROXY`
+- observed ChatGPT/OpenAI IP endpoints are routed via `geoip:MORDA-OPENAI`
+
+Keep OpenAI IP entries narrow because Cloudflare, Google Cloud, and Azure IP ranges are shared infrastructure.
 
 ## Workflows
 
