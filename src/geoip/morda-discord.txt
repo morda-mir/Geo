@@ -97,3 +97,6 @@
 162.159.136.234/32
 162.159.137.234/32
 162.159.138.234/32
+
+# Observed Discord voice UDP endpoint from Happ/Xray logs on 2026-05-14.
+35.217.8.44/32
