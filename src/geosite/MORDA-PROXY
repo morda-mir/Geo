@@ -155,7 +155,7 @@ full:roblox-poc.global.ssl.fastly.net
 full:robloxcorp.s.llnwi.net
 
 # OpenAI / ChatGPT
-# intentionally trimmed: keep core product + known delivery endpoints
+# core product + delivery endpoints, including Codex streaming support
 domain:chat.com
 domain:chatgpt.com
 domain:oaiusercontent.com
@@ -163,12 +163,23 @@ domain:oaistatic.com
 domain:openai.com
 domain:sora.com
 domain:crixet.com
+domain:featureassets.org
+domain:featuregates.org
+domain:openaimerge.com
+domain:prodregistryv2.org
+domain:statsig.com
+domain:statsigapi.net
+domain:workos.com
+domain:workoscdn.com
 full:chatgpt.livekit.cloud
 full:host.livekit.cloud
 full:turn.livekit.cloud
+full:challenges.cloudflare.com
+full:ct.sendgrid.net
 full:http-intake.logs.datadoghq.com
 full:http-intake-l4.logs.datadoghq.com
 full:browser-intake-datadoghq.com
+full:rum.browser-intake-datadoghq.com
 full:o33249.ingest.sentry.io
 full:openai.com.cdn.cloudflare.net
 full:openaiapi-site.azureedge.net
@@ -176,6 +187,7 @@ full:openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
 full:openaicom.imgix.net
 full:openaicomproductionae4b.blob.core.windows.net
 full:production-openaicom-storage.azureedge.net
+full:workos.imgix.net
 
 # Anthropic / Claude
 domain:anthropic.com
