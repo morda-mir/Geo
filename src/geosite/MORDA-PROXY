@@ -213,6 +213,28 @@ full:youtube-ui.l.google.com
 full:wide-youtube.l.google.com
 full:yt3.googleusercontent.com
 
+# Google core for China / YouTube auth
+# keep narrower than full geosite:google, but cover login, search, APIs, and shared Google assets
+domain:google.com
+domain:google.com.hk
+domain:google.com.sg
+domain:google.ru
+domain:googleapis.com
+domain:gstatic.com
+domain:googleusercontent.com
+domain:g.co
+domain:goo.gl
+full:accounts.google.com
+full:www.google.com
+full:suggestqueries.google.com
+full:clients1.google.com
+full:clients2.google.com
+full:clients3.google.com
+full:clients4.google.com
+full:clients5.google.com
+full:clients6.google.com
+full:safebrowsing.googleapis.com
+
 # Instagram / Facebook
 # intentionally trimmed: no typo / squat / marketing domains
 domain:instagram.com
