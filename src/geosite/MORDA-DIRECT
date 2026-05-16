@@ -151,3 +151,13 @@ domain:vi.ru
 domain:2x2tv.ru
 domain:litres.ru
 domain:digitalaccess.ru
+
+# Twitch
+domain:ext-twitch.tv
+domain:jtvnw.net
+domain:live-video.net
+domain:ttvnw.net
+domain:twitch.tv
+domain:twitchcdn.net
+domain:twitchcon.com
+domain:twitchsvc.net
