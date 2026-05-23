@@ -1,0 +1,35 @@
+name: Build geosite.dat
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/geosite/**'
+      - 'tools/build_geosite.py'
+      - '.github/workflows/build-geosite.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-geosite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Build geosite.dat
+        run: python tools/build_geosite.py
+
+      - name: Commit generated geosite.dat
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: build: update geosite.dat
+          file_pattern: dist/geosite.dat
