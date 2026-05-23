@@ -12,9 +12,10 @@ SRC_GEOSITE = ROOT / 'src' / 'geosite'
 SRC_GEOIP = ROOT / 'src' / 'geoip'
 
 # Source categories merged into categories already used by Happ profiles.
-# Result: users keep geosite:MORDA-PROXY, but short-video rules are included in it.
+# Result: users keep geosite:MORDA-PROXY, but app-specific extra rules are included in it.
 MERGE_GEOSITE = {
     'MORDA-TT': 'MORDA-PROXY',
+    'MORDA-OPENAI-EXTRA': 'MORDA-PROXY',
 }
 
 
