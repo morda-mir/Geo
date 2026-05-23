@@ -18,7 +18,6 @@ domain:telegram.space
 domain:telesco.pe
 domain:tg.dev
 domain:ton.org
-domain:tx.me
 domain:usercontent.dev
 
 # WhatsApp
@@ -351,16 +350,19 @@ full:roblox-poc.global.ssl.fastly.net
 full:robloxcorp.s.llnwi.net
 
 # OpenAI / ChatGPT
-# core product + delivery endpoints, including Codex streaming support
+# core product + desktop/realtime/delivery endpoints observed in Happ logs
 domain:chat.com
 domain:chatgpt.com
 domain:oaiusercontent.com
 domain:oaistatic.com
 domain:openai.com
 domain:sora.com
+domain:livekit.cloud
 domain:crixet.com
 domain:auth0.com
 domain:client-api.arkoselabs.com
+domain:datadoghq.com
+domain:browser-intake-datadoghq.com
 domain:featureassets.org
 domain:featuregates.org
 domain:identrust.com
@@ -371,6 +373,7 @@ domain:statsig.com
 domain:statsigapi.net
 domain:workos.com
 domain:workoscdn.com
+full:ws.chatgpt.com
 full:chatgpt.livekit.cloud
 full:host.livekit.cloud
 full:turn.livekit.cloud
@@ -518,80 +521,3 @@ full:notebooklm.google.com
 domain:notebooklm.google
 full:notebooklm-pa.googleapis.com
 full:notebooklm.googleapis.com
-full:robinfrontend-pa.googleapis.com
-full:webchannel-alkalimakersuite-pa.clients6.google.com
-full:geller-pa.googleapis.com
-full:proactivebackend-pa.googleapis.com
-full:aisandbox-pa.googleapis.com
-full:aicode.googleapis.com
-full:aida.googleapis.com
-domain:opal.google
-full:opal.google.com
-domain:antigravity.google
-domain:antigravity-unleash.goog
-full:stitch.withgoogle.com
-
-# More AI / LLM services from public rulesets
-domain:perplexity.ai
-domain:perplexity.com
-domain:pplx.ai
-full:ppl-ai-file-upload.s3.amazonaws.com
-full:pplx-res.cloudinary.com
-domain:copilot.microsoft.com
-domain:githubcopilot.com
-full:copilot-proxy.githubusercontent.com
-full:copilot-workspace.githubnext.com
-full:copilotprodattachments.blob.core.windows.net
-full:copilot-telemetry-service.githubusercontent.com
-full:copilot-telemetry.githubusercontent.com
-domain:grok.com
-domain:x.ai
-full:grok.x.com
-domain:huggingface.co
-domain:hf.co
-domain:hf.space
-domain:poe.com
-domain:poecdn.net
-domain:mistral.ai
-domain:openrouter.ai
-domain:deepseek.com
-domain:meta.ai
-domain:ollama.com
-domain:cohere.ai
-domain:cohere.com
-domain:elevenlabs.io
-domain:elevenlabs.com
-domain:groq.com
-domain:cerebras.ai
-domain:manus.im
-domain:manuscdn.com
-domain:devin.ai
-domain:kiro.dev
-domain:lmstudio.ai
-domain:gateway.ai.cloudflare.com
-domain:duck.ai
-domain:dify.ai
-domain:langchain.com
-domain:anythingllm.com
-domain:chutes.ai
-domain:minimax.io
-domain:openart.ai
-domain:cursor.com
-domain:cursor.sh
-domain:cursorapi.com
-domain:cursor-cdn.com
-domain:windsurf.com
-domain:windsurf.build
-domain:codeium.com
-domain:codeiumdata.com
-domain:coderabbit.ai
-full:coderabbit.gallery.vsassets.io
-domain:coze.com
-domain:marscode.com
-domain:trae.ai
-domain:cici.com
-domain:ciciaicdn.com
-domain:dola.com
-
-# RemnaWave docs
-domain:docs.rw
