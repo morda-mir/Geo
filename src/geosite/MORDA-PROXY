@@ -18,6 +18,7 @@ domain:telegram.space
 domain:telesco.pe
 domain:tg.dev
 domain:ton.org
+domain:tx.me
 domain:usercontent.dev
 
 # WhatsApp
@@ -248,18 +249,42 @@ domain:fb.watch
 domain:fbcdn.net
 domain:fbsbx.com
 
-# Discord
-# intentionally trimmed: no joke / merch / status side domains
+# Discord / Developer Portal
+# app, web, CDN, gateway, voice/media and anti-abuse endpoints observed in Happ logs
 domain:dis.gd
+domain:discord-activities.com
+domain:discordactivities.com
 domain:discord.com
+domain:discord.dev
 domain:discord.gg
+domain:discord.gift
+domain:discord.gifts
 domain:discord.media
+domain:discord.new
+domain:discord.status
+domain:discord.store
 domain:discordapp.com
+domain:discordapp.io
 domain:discordapp.net
 domain:discordcdn.com
 domain:discordstatus.com
+full:canary.discord.com
+full:cdn.discordapp.com
+full:discord.com
 full:discord-attachments-uploads-prd.storage.googleapis.com
+full:gateway.discord.com
+full:gateway.discord.gg
 full:hammerandchisel.ssl.zendesk.com
+full:media.discordapp.net
+full:ptb.discord.com
+full:updates.discord.com
+
+# hCaptcha / Discord Developer Portal anti-abuse
+domain:hcaptcha.com
+full:api.hcaptcha.com
+full:js.hcaptcha.com
+full:newassets.hcaptcha.com
+regexp:^.+\.w\.hcaptcha\.com$
 
 # Supercell / Brawl Stars
 domain:supercell.com
@@ -518,6 +543,3 @@ full:labs.google.com
 domain:labs.google
 full:makersuite.google.com
 full:notebooklm.google.com
-domain:notebooklm.google
-full:notebooklm-pa.googleapis.com
-full:notebooklm.googleapis.com
