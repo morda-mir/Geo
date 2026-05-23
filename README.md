@@ -34,7 +34,7 @@ These categories are built from `src/geosite/`:
 - `geosite:MORDA-ADS`
 - `geosite:MORDA-DISCORD-EXTRA`
 
-`src/geosite/MORDA-TT` is merged into `geosite:MORDA-PROXY` during build, so Happ profiles do not need a separate `geosite:MORDA-TT` rule.
+`src/geosite/MORDA-TT` is built as a separate category and should be explicitly included in client proxy rules.
 
 ### GeoIP
 
@@ -55,7 +55,7 @@ These categories are intended for production routing in `dist/geoip.dat`:
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
-  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
+  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-TT", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
@@ -91,7 +91,8 @@ Typical groups:
 - Telegram domains
 - WhatsApp domains
 - YouTube domains and video/CDN-related endpoints
-- short-video / ByteDance domains merged from `src/geosite/MORDA-TT`
+- short-video / ByteDance domains
+- `geosite:MORDA-TT` as a dedicated TikTok/ByteDance category
 - other services that should be routed through proxy by domain
 
 ### `geosite:MORDA-ADS`
@@ -150,6 +151,28 @@ dist/geosite.dat          Production geosite file for clients
 `src/geosite/` is the source of truth for custom domain categories.
 
 `dist/*.dat` files are the production assets consumed by clients.
+
+## Build and push workflow
+
+### Which files to edit
+
+- Domain rules: `src/geosite/*`
+- IP rules: `src/geoip/*`
+- Do not edit `dist/*.dat` manually.
+
+### How rebuilds happen
+
+- `build-custom-geo` rebuilds and commits `dist/geosite.dat` after changes in `src/geosite/**`.
+- `build-happ-compatible-geo` rebuilds and commits `dist/geosite.dat` + `dist/geoip.dat` after changes in `src/geosite/**`, `src/geoip/**`, or `build_morda_geo_happ.py`.
+- Both workflows push generated `dist/*.dat` back to `main`.
+
+### Safe push checklist
+
+1. Commit only source changes (`src/geosite/*`, `src/geoip/*`, scripts/workflows as needed).
+2. Push to `main`.
+3. Wait for Actions to finish and verify green status.
+4. Confirm new `dist/*.dat` commit was created by GitHub Actions.
+5. Only then ask clients to refresh geo files.
 
 ## Maintenance rules
 
