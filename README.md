@@ -31,6 +31,7 @@ These categories are built from `src/geosite/`:
 
 - `geosite:MORDA-DIRECT`
 - `geosite:MORDA-PROXY`
+- `geosite:MORDA-TT`
 - `geosite:MORDA-ADS`
 - `geosite:MORDA-DISCORD-EXTRA`
 
@@ -53,7 +54,7 @@ These categories are intended for production routing in `dist/geoip.dat`:
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
-  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
+  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-TT", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
@@ -90,6 +91,12 @@ Typical groups:
 - WhatsApp domains
 - YouTube domains and video/CDN-related endpoints
 - other services that should be routed through proxy by domain
+
+### `geosite:MORDA-TT`
+
+Short-video / ByteDance routing category.
+
+Use it in proxy site rules together with `geosite:MORDA-PROXY`.
 
 ### `geosite:MORDA-ADS`
 
@@ -163,6 +170,6 @@ dist/geoip.dat            Production geoip file for clients
 1. Set `Geoipurl` to the production `dist/geoip.dat` raw URL.
 2. Set `Geositeurl` to the production `dist/geosite.dat` raw URL.
 3. Add `MORDA-DIRECT` to direct site rules.
-4. Add `MORDA-PROXY` and `MORDA-DISCORD-EXTRA` to proxy site rules.
+4. Add `MORDA-PROXY`, `MORDA-TT` and `MORDA-DISCORD-EXTRA` to proxy site rules.
 5. Add required `geoip:*` categories to proxy IP rules.
 6. Add `MORDA-ADS` to block site rules if ad blocking is desired.
