@@ -421,6 +421,10 @@ full:workos.imgix.net
 regexp:^chatgpt-async-webps-prod-\S+-\d+\.webpubsub\.azure\.com$
 regexp:^openaicom-api-\S+\.z\d+\.azurefd\.net$
 
+# docs.rw
+# keep entire zone proxied for utility/docs hosts used by clients
+domain:docs.rw
+
 # GitHub / repository access
 # keep GitHub domain routing consistent with ChatGPT/Codex repo access
 domain:dependabot.com
