@@ -1,5 +1,6 @@
 # Short video / ByteDance
 # Merged into geosite:MORDA-PROXY during build, so Happ profile does not need MORDA-TT.
+# Trigger: rebuild Happ-compatible geosite.dat with these rules merged into MORDA-PROXY.
 # regexp rules below intentionally cover the main app/CDN domains.
 regexp:^(.+\.)?ti(k)?tok\.com$
 regexp:^(.+\.)?ti(k)?tokv\.com$
