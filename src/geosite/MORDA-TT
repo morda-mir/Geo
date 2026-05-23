@@ -1,4 +1,5 @@
 # Short video / ByteDance
+# Proxied as a separate category: geosite:MORDA-TT
 # regexp rules below intentionally cover the main app/CDN domains.
 regexp:^(.+\.)?ti(k)?tok\.com$
 regexp:^(.+\.)?ti(k)?tokv\.com$
