@@ -1,18 +1,17 @@
 # Short video / ByteDance
 # Merged into geosite:MORDA-PROXY during build, so Happ profile does not need MORDA-TT.
-# Based on public v2fly / MetaCubeX / blackmatrix7 TikTok rulesets, trimmed for proxy routing.
-# regexp rules below intentionally cover the main app/CDN domains.
-regexp:^(.+\.)?ti(k)?tok\.com$
-regexp:^(.+\.)?ti(k)?tokv\.com$
-regexp:^(.+\.)?ti(k)?tokv\.us$
-regexp:^(.+\.)?ti(k)?tokv\.eu$
-regexp:^(.+\.)?ti(k)?tokcdn\.com$
-regexp:^(.+\.)?ti(k)?tokcdn-us\.com$
-regexp:^(.+\.)?ti(k)?tokcdn-eu\.com$
-regexp:^(.+\.)?ti(k)?tokd\.net$
-regexp:^(.+\.)?ti(k)?tokd\.org$
-regexp:^(.+\.)?ti(k)?tokw\.eu$
-regexp:^(.+\.)?ti(k)?tokw\.us$
+# Domain-only rules for domain-list-community build compatibility.
+domain:tiktok.com
+domain:tiktokv.com
+domain:tiktokv.us
+domain:tiktokv.eu
+domain:tiktokcdn.com
+domain:tiktokcdn-us.com
+domain:tiktokcdn-eu.com
+domain:tiktokd.net
+domain:tiktokd.org
+domain:tiktokw.eu
+domain:tiktokw.us
 domain:bytedapm.com
 domain:bytegecko-i18n.com
 domain:byteintlapi.com
