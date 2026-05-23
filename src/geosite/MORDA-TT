@@ -1,11 +1,22 @@
 # Short video / ByteDance
+# regexp rules below intentionally cover the main app/CDN domains.
+regexp:^(.+\.)?ti(k)?tok\.com$
+regexp:^(.+\.)?ti(k)?tokv\.com$
+regexp:^(.+\.)?ti(k)?tokv\.us$
+regexp:^(.+\.)?ti(k)?tokcdn\.com$
+regexp:^(.+\.)?ti(k)?tokcdn-us\.com$
+regexp:^(.+\.)?ti(k)?tokcdn-eu\.com$
 domain:musical.ly
 domain:snssdk.com
 domain:byteoversea.com
 domain:byteoversea.net
 domain:ibytedtos.com
 domain:ibyteimg.com
+domain:bytedance.com
+domain:bytedance.net
+domain:bytecdn.cn
 domain:byteimg.com
 domain:pstatp.com
 domain:amemv.com
 domain:aweme.com
+domain:iesdouyin.com
