@@ -1,15 +1,21 @@
 # Short video / ByteDance
 # Merged into geosite:MORDA-PROXY during build, so Happ profile does not need MORDA-TT.
-# Trigger: rebuild Happ-compatible geosite.dat with these rules merged into MORDA-PROXY.
+# Based on public v2fly / MetaCubeX / blackmatrix7 TikTok rulesets, trimmed for proxy routing.
 # regexp rules below intentionally cover the main app/CDN domains.
 regexp:^(.+\.)?ti(k)?tok\.com$
 regexp:^(.+\.)?ti(k)?tokv\.com$
 regexp:^(.+\.)?ti(k)?tokv\.us$
+regexp:^(.+\.)?ti(k)?tokv\.eu$
 regexp:^(.+\.)?ti(k)?tokcdn\.com$
 regexp:^(.+\.)?ti(k)?tokcdn-us\.com$
 regexp:^(.+\.)?ti(k)?tokcdn-eu\.com$
-domain:musical.ly
-domain:snssdk.com
+regexp:^(.+\.)?ti(k)?tokd\.net$
+regexp:^(.+\.)?ti(k)?tokd\.org$
+regexp:^(.+\.)?ti(k)?tokw\.eu$
+regexp:^(.+\.)?ti(k)?tokw\.us$
+domain:bytedapm.com
+domain:bytegecko-i18n.com
+domain:byteintlapi.com
 domain:byteoversea.com
 domain:byteoversea.net
 domain:ibytedtos.com
@@ -18,7 +24,34 @@ domain:bytedance.com
 domain:bytedance.net
 domain:bytecdn.cn
 domain:byteimg.com
+domain:ipstatp.com
+domain:isnssdk.com
+domain:muscdn.com
+domain:musical.ly
+domain:sgpstatp.com
+domain:snssdk.com
 domain:pstatp.com
 domain:amemv.com
 domain:aweme.com
 domain:iesdouyin.com
+domain:tik-tokapi.com
+domain:tiktok-minis.com
+domain:tiktok-row.net
+domain:tiktokeu-cdn.com
+domain:tiktokglobalshopv.com
+domain:tiktokminis.us
+domain:tiktokrow-cdn.com
+domain:ttcdn-us.com
+domain:ttlivecdn.com
+domain:ttoverseaus.net
+domain:ttwstatic.com
+domain:ttwebview.com
+domain:tiktokmusic.app
+full:p16-tiktokcdn-com.akamaized.net
+full:tiktokcdn-us.com.edgesuite.net
+full:tiktokcdn.com.akamaized.net
+full:tiktokcdn.com.edgesuite.net
+full:tiktokv.com.edgekey.net
+full:tiktokv.com.edgesuite.net
+full:lf16-effectcdn.byteeffecttos-g.com
+full:lf16-pkgcdn.pitaya-clientai.com
