@@ -13,6 +13,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: geo-dist-main
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,4 +43,11 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add dist/geosite.dat
           git commit -m 'build: refresh geosite.dat [skip ci]'
-          git push
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
+          echo 'Push failed after 3 attempts'
+          exit 1
