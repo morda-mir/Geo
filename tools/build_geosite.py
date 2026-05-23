@@ -7,6 +7,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT / "src" / "geosite"
 OUT_FILE = ROOT / "dist" / "geosite.dat"
 
+# Extra source categories that should be merged into an already-used category.
+# This lets clients keep the same profile, for example only geosite:MORDA-PROXY.
+MERGE_INTO = {
+    "MORDA-TT": "MORDA-PROXY",
+}
+
 TYPE_MAP = {
     "plain": 0,
     "regexp": 1,
@@ -95,18 +101,36 @@ def parse_source(path: Path) -> list[tuple[int, str]]:
     return rules
 
 
+def append_unique(target: list[tuple[int, str]], source: list[tuple[int, str]]) -> None:
+    seen = set(target)
+    for item in source:
+        if item not in seen:
+            target.append(item)
+            seen.add(item)
+
+
 def main() -> None:
     if not SRC_DIR.exists():
         raise SystemExit(f"missing source dir: {SRC_DIR}")
 
-    entries: list[tuple[str, list[tuple[int, str]]]] = []
+    by_code: dict[str, list[tuple[int, str]]] = {}
     for path in sorted(SRC_DIR.iterdir()):
         if not path.is_file() or path.name.startswith("."):
             continue
         code = path.name.upper()
         rules = parse_source(path)
-        if rules:
-            entries.append((code, rules))
+        if not rules:
+            continue
+        by_code.setdefault(code, [])
+        append_unique(by_code[code], rules)
+
+    for source_code, target_code in MERGE_INTO.items():
+        source_rules = by_code.get(source_code, [])
+        if source_rules:
+            by_code.setdefault(target_code, [])
+            append_unique(by_code[target_code], source_rules)
+
+    entries = [(code, by_code[code]) for code in sorted(by_code)]
 
     OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     OUT_FILE.write_bytes(geosite_list(entries))
