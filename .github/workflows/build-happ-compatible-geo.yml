@@ -1,5 +1,6 @@
 name: build-happ-compatible-geo
 
+# Build production Happ geo assets from source routing rules.
 on:
   workflow_dispatch:
   push:
