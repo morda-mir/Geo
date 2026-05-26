@@ -10,6 +10,7 @@ DIST = ROOT / 'dist'
 SRC_GEOSITE = ROOT / 'src' / 'geosite'
 UPSTREAM_GEOIP_URL = 'https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat'
 
+# Build geosite from local rules and geoip from production upstream plus local custom categories.
 # Source categories merged into categories already used by Happ profiles.
 # Result: users keep geosite:MORDA-PROXY, but short-video rules are included in it.
 MERGE_GEOSITE = {
