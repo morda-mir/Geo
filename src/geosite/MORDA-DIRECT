@@ -165,6 +165,16 @@ domain:twitchsvc.net
 full:edge.ads.twitch.tv
 full:global.poe.live-video.net
 
+# Twitch dynamic HLS / CloudFront video hosts observed in Happ logs.
+regexp:^.+\.j\.cloudfront\.hls\.ttvnw\.net$
+domain:cloudfront.hls.ttvnw.net
+domain:hls.ttvnw.net
+domain:playlist.ttvnw.net
+domain:video-weaver.com
+domain:video-edge.net
+domain:poe.live-video.net
+domain:stats.live-video.net
+
 # Twitch CloudFront exact hosts
 full:8218525761b0.j.cloudfront.hls.ttvnw.net
 full:d1g1f25tn8m2e6.cloudfront.net
