@@ -62,16 +62,36 @@ def load_networks(path: Path) -> list[ipaddress._BaseNetwork]:
     return networks
 
 
+def geoip_code_from_path(path: Path) -> str:
+    name = path.name
+    if name.endswith('.txt'):
+        name = name[:-4]
+    if name.endswith('-ip'):
+        name = name[:-3]
+    return name.upper()
+
+
+def iter_custom_geoip_files() -> list[Path]:
+    if not SRC_GEOIP.exists():
+        return []
+    return sorted(
+        path for path in SRC_GEOIP.iterdir()
+        if path.is_file() and not path.name.startswith('.')
+    )
+
+
 def main() -> None:
     if not UPSTREAM_GEOIP.exists():
         raise SystemExit(f'missing upstream geoip: {UPSTREAM_GEOIP}')
-    if not SRC_GEOIP.exists():
+
+    custom_files = iter_custom_geoip_files()
+    if not custom_files:
         shutil.copy2(UPSTREAM_GEOIP, OUTPUT_GEOIP)
         return
 
     output = bytearray(UPSTREAM_GEOIP.read_bytes())
-    for path in sorted(SRC_GEOIP.glob('*.txt')):
-        country_code = path.stem.upper()
+    for path in custom_files:
+        country_code = geoip_code_from_path(path)
         networks = load_networks(path)
         if not networks:
             continue
