@@ -166,6 +166,7 @@ full:edge.ads.twitch.tv
 full:global.poe.live-video.net
 
 # Twitch dynamic HLS / CloudFront video hosts observed in Happ logs.
+# This comment intentionally triggers the single Happ-compatible dist rebuild after removing duplicate workflows.
 regexp:^.+\.j\.cloudfront\.hls\.ttvnw\.net$
 domain:cloudfront.hls.ttvnw.net
 domain:hls.ttvnw.net
