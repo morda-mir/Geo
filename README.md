@@ -33,12 +33,15 @@ These categories are built from `src/geosite/`:
 - `geosite:MORDA-PROXY`
 - `geosite:MORDA-ADS`
 - `geosite:MORDA-DISCORD-EXTRA`
+- `geosite:MORDA-TT`
 
-`src/geosite/MORDA-TT` is built as a separate category and should be explicitly included in client proxy rules.
+`src/geosite/MORDA-TT` is also merged into `MORDA-PROXY` by the Happ-compatible build script, but it can still be used explicitly in client proxy rules.
 
 ### GeoIP
 
-These categories are intended for production routing in `dist/geoip.dat`:
+The production `dist/geoip.dat` is built from the large upstream geoip base plus custom categories from `src/geoip/`.
+
+These categories are intended for production routing:
 
 - `geoip:private`
 - `geoip:telegram`
@@ -81,6 +84,7 @@ Typical groups:
 - marketplaces, delivery, transport, maps and local utilities
 - mobile operators
 - local portals and ecosystems such as Yandex, VK and Mail.ru
+- Twitch video/HLS endpoints that should stay direct
 
 ### `geosite:MORDA-PROXY`
 
@@ -93,6 +97,7 @@ Typical groups:
 - YouTube domains and video/CDN-related endpoints
 - short-video / ByteDance domains
 - `geosite:MORDA-TT` as a dedicated TikTok/ByteDance category
+- OpenAI / ChatGPT / Codex domains
 - other services that should be routed through proxy by domain
 
 ### `geosite:MORDA-ADS`
@@ -132,25 +137,38 @@ Discord uses domain-based endpoints plus voice/media IP ranges.
 - domains should be routed through `geosite:MORDA-PROXY` and `geosite:MORDA-DISCORD-EXTRA`
 - known Discord voice/media IP ranges should be routed through `geoip:MORDA-DISCORD`
 
-### OpenAI / ChatGPT
+### OpenAI / ChatGPT / Codex
 
-ChatGPT uses domain-based endpoints and some IP-only or post-resolution realtime/API connections.
+ChatGPT and Codex use domain-based endpoints plus some IP-only or post-resolution realtime/API connections.
 
 - domains should be routed through `geosite:MORDA-PROXY`
-- observed ChatGPT/OpenAI IP endpoints should be routed through `geoip:MORDA-OPENAI`
+- observed OpenAI IP endpoints should be routed through `geoip:MORDA-OPENAI`
+- keep exactly one source file for the category: `src/geoip/morda-openai.txt`
 
 Keep OpenAI IP entries narrow. Cloudflare, Google Cloud and Azure ranges are shared infrastructure, so broad IP ranges can accidentally proxy unrelated traffic.
+
+### Telegram
+
+Telegram routing uses both:
+
+- `geosite:MORDA-PROXY` for Telegram domains
+- `geoip:telegram` from the large production geoip base for Telegram IP ranges
+
+Do not add a custom Telegram IP file unless logs prove the production `geoip:telegram` category is missing or incomplete.
 
 ## Source layout
 
 ```text
 src/geosite/              Custom geosite source categories
+src/geoip/                Custom geoip source categories
+scripts/                  Build helper scripts
 dist/geosite.dat          Production geosite file for clients
+dist/geoip.dat            Production geoip file for clients
 ```
 
-`src/geosite/` is the source of truth for custom domain categories.
+`src/geosite/` and `src/geoip/` are the source of truth.
 
-`dist/*.dat` files are the production assets consumed by clients.
+`dist/*.dat` files are generated production assets consumed by clients.
 
 ## Build and push workflow
 
@@ -158,21 +176,46 @@ dist/geosite.dat          Production geosite file for clients
 
 - Domain rules: `src/geosite/*`
 - IP rules: `src/geoip/*`
+- Build logic only when needed: `build_morda_geo_happ.py` and `scripts/*`
 - Do not edit `dist/*.dat` manually.
 
-### How rebuilds happen
+### Correct rebuild model
 
-- `build-custom-geo` rebuilds and commits `dist/geosite.dat` after changes in `src/geosite/**`.
-- `build-happ-compatible-geo` rebuilds and commits `dist/geosite.dat` + `dist/geoip.dat` after changes in `src/geosite/**`, `src/geoip/**`, or `build_morda_geo_happ.py`.
-- Both workflows push generated `dist/*.dat` back to `main`.
+Only one workflow should write production `dist/*.dat` files:
+
+```text
+.github/workflows/build-happ-compatible-geo.yml
+```
+
+It builds both files together:
+
+```text
+src/geosite/* + src/geoip/* + production geoip upstream
+→ dist/geosite.dat + dist/geoip.dat
+```
+
+Do not re-add separate workflows that write only `dist/geosite.dat` or only `dist/geoip.dat`. Parallel workflows can overwrite each other's generated files and create mismatched production assets.
 
 ### Safe push checklist
 
-1. Commit only source changes (`src/geosite/*`, `src/geoip/*`, scripts/workflows as needed).
-2. Push to `main`.
-3. Wait for Actions to finish and verify green status.
-4. Confirm new `dist/*.dat` commit was created by GitHub Actions.
-5. Only then ask clients to refresh geo files.
+1. Commit only source/docs/script changes. Do not commit manual `dist/*.dat` edits.
+2. Before touching `src/geoip/`, check that one category is not defined by two files. Example: keep only `src/geoip/morda-openai.txt` for `MORDA-OPENAI`.
+3. Push/merge to `main`.
+4. Wait for `build-happ-compatible-geo` to finish.
+5. Confirm the latest generated commit is `build: refresh Happ-compatible dat files [skip ci]`.
+6. Check file sizes before telling clients to refresh:
+   - `dist/geoip.dat` should stay large, around 19-20 MB.
+   - `dist/geosite.dat` is small, around tens of KB.
+7. Only then ask clients to refresh geo files in Happ.
+
+### Emergency sanity checks
+
+After a rebuild, verify:
+
+- `geoip.dat` still contains `TELEGRAM`.
+- `geoip.dat` contains only one `MORDA-OPENAI` category.
+- `geosite.dat` contains expected custom categories such as `MORDA-DIRECT` and `MORDA-PROXY`.
+- Happ logs show OpenAI/Codex IPs routed through `proxy`, and local/private IPs routed through `direct`.
 
 ## Maintenance rules
 
@@ -181,7 +224,8 @@ dist/geosite.dat          Production geosite file for clients
 - Add IP rules only after confirming them in Happ/Xray logs.
 - Put domains into geosite categories whenever possible.
 - Keep `MORDA-ADS` small to avoid breaking pages and apps.
-- After changing sources, rebuild/update the corresponding `dist/*.dat` file before using it in clients.
+- Do not create duplicate category source files in `src/geoip/`.
+- After changing sources, wait for Actions to regenerate `dist/*.dat` before using it in clients.
 
 ## Client setup checklist
 
