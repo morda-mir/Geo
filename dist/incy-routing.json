@@ -1,6 +1,6 @@
 {
   "Name": "MordaRouting",
-  "GlobalProxy": false,
+  "GlobalProxy": "false",
   "RouteOrder": "block-proxy-direct",
   "RemoteDNSType": "DoH",
   "RemoteDNSDomain": "https://8.8.8.8/dns-query",
@@ -10,6 +10,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
+  "LastUpdated": "1780920000",
   "DnsHosts": {},
   "DirectSites": [
     "geosite:MORDA-DIRECT"
@@ -34,6 +35,6 @@
   ],
   "BlockIp": [],
   "DomainStrategy": "AsIs",
-  "FakeDNS": false,
-  "UseChunkFiles": false
+  "FakeDNS": "false",
+  "UseChunkFiles": "false"
 }
