@@ -1,0 +1,39 @@
+{
+  "Name": "MordaRouting",
+  "GlobalProxy": false,
+  "RouteOrder": "block-proxy-direct",
+  "RemoteDNSType": "DoH",
+  "RemoteDNSDomain": "https://8.8.8.8/dns-query",
+  "RemoteDNSIP": "8.8.8.8",
+  "DomesticDNSType": "DoH",
+  "DomesticDNSDomain": "https://77.88.8.8/dns-query",
+  "DomesticDNSIP": "77.88.8.8",
+  "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
+  "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
+  "DnsHosts": {},
+  "DirectSites": [
+    "geosite:MORDA-DIRECT"
+  ],
+  "DirectIp": [
+    "geoip:private"
+  ],
+  "ProxySites": [
+    "geosite:MORDA-PROXY",
+    "geosite:MORDA-TT",
+    "geosite:MORDA-DISCORD-EXTRA"
+  ],
+  "ProxyIp": [
+    "geoip:telegram",
+    "geoip:MORDA-BRAWLSTARS",
+    "geoip:MORDA-ROBLOX",
+    "geoip:MORDA-DISCORD",
+    "geoip:MORDA-OPENAI"
+  ],
+  "BlockSites": [
+    "geosite:MORDA-ADS"
+  ],
+  "BlockIp": [],
+  "DomainStrategy": "AsIs",
+  "FakeDNS": false,
+  "UseChunkFiles": false
+}
