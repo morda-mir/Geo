@@ -1,14 +1,22 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import shutil
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / 'dist'
 SRC_GEOSITE = ROOT / 'src' / 'geosite'
 UPSTREAM_GEOIP_URL = 'https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat'
+INCY_ROUTING_PROFILES = (
+    DIST / 'incy-routing.json',
+    DIST / 'incy-routing-v2.json',
+)
+GEO_ASSETS = (DIST / 'geosite.dat', DIST / 'geoip.dat')
 
 # Build geosite from local rules and geoip from production upstream plus local custom categories.
 # Source categories merged into categories already used by Happ profiles.
@@ -84,11 +92,53 @@ def build_geoip() -> None:
     upstream.unlink(missing_ok=True)
 
 
+def file_sha256(path: Path) -> str | None:
+    if not path.exists():
+        return None
+
+    digest = hashlib.sha256()
+    with path.open('rb') as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def write_sha256_sidecars() -> None:
+    for asset in GEO_ASSETS:
+        digest = file_sha256(asset)
+        if digest is None:
+            raise FileNotFoundError(f'Missing generated asset: {asset}')
+        sidecar = asset.with_name(f'{asset.name}.sha256')
+        with sidecar.open('w', encoding='ascii', newline='\n') as output:
+            output.write(f'{digest}\n')
+
+
+def update_incy_timestamps() -> None:
+    timestamp = str(int(time.time()))
+    for routing_profile in INCY_ROUTING_PROFILES:
+        if not routing_profile.exists():
+            raise FileNotFoundError(f'Missing INCY routing profile: {routing_profile}')
+
+        profile = json.loads(routing_profile.read_text(encoding='utf-8'))
+        profile['LastUpdated'] = timestamp
+        routing_profile.write_text(
+            json.dumps(profile, ensure_ascii=False, indent=2) + '\n',
+            encoding='utf-8',
+        )
+
+
 def main() -> None:
     DIST.mkdir(parents=True, exist_ok=True)
+    previous_hashes = {asset: file_sha256(asset) for asset in GEO_ASSETS}
+
     with tempfile.TemporaryDirectory(prefix='morda-geo-happ-') as tmp:
         build_geosite(Path(tmp))
         build_geoip()
+
+    current_hashes = {asset: file_sha256(asset) for asset in GEO_ASSETS}
+    write_sha256_sidecars()
+    if current_hashes != previous_hashes:
+        update_incy_timestamps()
 
 
 if __name__ == '__main__':

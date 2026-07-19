@@ -1,5 +1,5 @@
 {
-  "Name": "MordaRouting",
+  "Name": "MordaRoutingV2",
   "GlobalProxy": "false",
   "RouteOrder": "block-proxy-direct",
   "RemoteDNSType": "DoH",
