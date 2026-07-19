@@ -11,6 +11,9 @@ Use these URLs in Happ / Xray-compatible clients:
 ```text
 https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat
 https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat
+https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat.sha256
+https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat.sha256
+https://raw.githubusercontent.com/morda-mir/Geo/main/dist/incy-routing-v2.json
 ```
 
 ## What this repo is for
@@ -80,6 +83,10 @@ build_morda_geo_happ.py         Main production builder
 scripts/append_custom_geoip.py   Helper that appends src/geoip/* to the large geoip base
 dist/geosite.dat                Generated production geosite file
 dist/geoip.dat                  Generated production geoip file
+dist/geosite.dat.sha256         SHA-256 used by INCY update checks
+dist/geoip.dat.sha256           SHA-256 used by INCY update checks
+dist/incy-routing.json          Current production INCY profile
+dist/incy-routing-v2.json       Isolated profile for the new production stack
 .github/workflows/build-happ-compatible-geo.yml
                                  The only workflow that should write dist/*.dat
 ```
@@ -110,7 +117,13 @@ src/geosite/*
 
 large upstream geoip.dat + src/geoip/*
 → dist/geoip.dat
+
+dist/*.dat
+→ dist/*.dat.sha256
 ```
+
+When either generated `.dat` file changes, the builder also refreshes
+`LastUpdated` in both INCY routing profiles.
 
 The `geoip.dat` file must stay large, around 19-20 MB. If it becomes a tiny KB-sized file, the build is wrong.
 
