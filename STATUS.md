@@ -60,12 +60,14 @@ geosite:MORDA-DISCORD-EXTRA
 geoip:private
 geoip:telegram
 geoip:MORDA-BRAWLSTARS
-geoip:MORDA-ROBLOX
 geoip:MORDA-DISCORD
 geoip:MORDA-OPENAI
 ```
 
 `geoip:telegram` comes from the large production geoip base.
+
+`geoip:MORDA-ROBLOX` remains available only for compatibility with older
+profiles and is not referenced by current production routing.
 
 `geoip:MORDA-OPENAI` must have exactly one source file:
 
@@ -81,11 +83,10 @@ src/geoip/morda-openai.txt
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
-  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-TT", "geosite:MORDA-DISCORD-EXTRA"],
+  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
-    "geoip:MORDA-ROBLOX",
     "geoip:MORDA-DISCORD",
     "geoip:MORDA-OPENAI"
   ],
