@@ -35,16 +35,16 @@ details.
 ## Discord voice
 
 - Discord web, gateway, media, and voice domains remain proxied.
-- Voice traffic can switch from a domain endpoint to a raw UDP IP and port, so
-  domain rules alone are not sufficient.
-- Do not remove the current Discord IP category as part of unrelated cleanup.
-- Do not add broad shared cloud ranges merely because one observed address falls
-  inside them.
-- Before changing Discord IP coverage, collect successful and failed voice
-  sessions, record the endpoint, UDP destination, network prefix/ASN, client
-  region, proxy node, and observation date.
-- Narrow or aggregate ranges only after confirming that voice continues to work
-  from both Russia and mainland China.
+- Active `geoip:MORDA-DISCORD` routing is disabled because voice endpoints are
+  dynamic and migrating across shared cloud infrastructure. Maintaining broad
+  provider ranges conflicts with the minimum-proxy policy and can destabilize
+  unrelated traffic.
+- Keep `geoip:MORDA-DISCORD` in generated assets temporarily so older installed
+  profiles that still reference the category do not fail to load.
+- Voice connectivity is best-effort in restricted networks and can fail even
+  while text, authentication, web, and media continue to work.
+- Do not replace the category with catch-all UDP, broad cloud-provider ranges,
+  or forced per-application proxying in the shared production profile.
 
 ## Safe rollout rules
 

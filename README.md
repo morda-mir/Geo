@@ -54,11 +54,12 @@ These categories are intended for production routing:
 - `geoip:private`
 - `geoip:telegram`
 - `geoip:MORDA-BRAWLSTARS`
-- `geoip:MORDA-DISCORD`
 - `geoip:MORDA-OPENAI`
 
-`geoip:MORDA-ROBLOX` remains in the generated database for compatibility with
-older profiles, but it is not part of current production proxy routing.
+`geoip:MORDA-ROBLOX` and `geoip:MORDA-DISCORD` remain in the generated database
+for compatibility with older profiles, but they are not part of current
+production proxy routing. Discord domains remain proxied through the geosite
+categories; only broad IP-based voice routing is disabled.
 
 ## Recommended desktop Happ routing profile
 
@@ -72,7 +73,6 @@ older profiles, but it is not part of current production proxy routing.
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
-    "geoip:MORDA-DISCORD",
     "geoip:MORDA-OPENAI"
   ],
   "BlockSites": ["geosite:MORDA-ADS"],

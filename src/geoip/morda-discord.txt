@@ -1,5 +1,6 @@
 # Discord IP ranges from public rule-set candidates.
 # Main source: nDPI generated Discord network list + public Discord voice/media lists.
+# Compatibility only: current production profiles do not actively reference this category.
 # Keep domain routing in geosite:MORDA-PROXY and geosite:MORDA-DISCORD-EXTRA.
 # Cloudflare media candidates are intentionally narrow public voice/media ranges, not whole Cloudflare.
 3.233.158.24/32
