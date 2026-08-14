@@ -27,7 +27,6 @@
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
-    "geoip:MORDA-DISCORD",
     "geoip:MORDA-OPENAI"
   ],
   "BlockSites": [

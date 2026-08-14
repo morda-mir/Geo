@@ -60,7 +60,6 @@ geosite:MORDA-DISCORD-EXTRA
 geoip:private
 geoip:telegram
 geoip:MORDA-BRAWLSTARS
-geoip:MORDA-DISCORD
 geoip:MORDA-OPENAI
 ```
 
@@ -68,6 +67,10 @@ geoip:MORDA-OPENAI
 
 `geoip:MORDA-ROBLOX` remains available only for compatibility with older
 profiles and is not referenced by current production routing.
+
+`geoip:MORDA-DISCORD` also remains available only for compatibility. Discord
+domains are still proxied, but the broad and frequently changing IP routing
+previously used for voice is no longer active in production profiles.
 
 `geoip:MORDA-OPENAI` must have exactly one source file:
 
@@ -87,7 +90,6 @@ src/geoip/morda-openai.txt
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
-    "geoip:MORDA-DISCORD",
     "geoip:MORDA-OPENAI"
   ],
   "BlockSites": ["geosite:MORDA-ADS"],
