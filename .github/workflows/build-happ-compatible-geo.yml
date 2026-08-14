@@ -3,13 +3,27 @@ name: build-happ-compatible-geo
 # Build production Happ geo assets from source routing rules.
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/geosite/**'
+      - 'src/geoip/**'
+      - 'scripts/**'
+      - 'build_morda_geo_happ.py'
+      - 'dist/incy-routing.json'
+      - 'dist/incy-routing-v2.json'
+      - '.github/workflows/build-happ-compatible-geo.yml'
   push:
     branches:
       - main
     paths:
       - 'src/geosite/**'
       - 'src/geoip/**'
+      - 'scripts/**'
       - 'build_morda_geo_happ.py'
+      - 'dist/incy-routing.json'
+      - 'dist/incy-routing-v2.json'
       - '.github/workflows/build-happ-compatible-geo.yml'
 
 permissions:
@@ -40,6 +54,7 @@ jobs:
         run: python3 build_morda_geo_happ.py
 
       - name: Commit generated geo assets
+        if: github.event_name != 'pull_request'
         run: |
           if git diff --quiet -- dist; then
             echo 'No dist changes'

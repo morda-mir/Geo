@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / 'dist'
 SRC_GEOSITE = ROOT / 'src' / 'geosite'
+SRC_GEOIP = ROOT / 'src' / 'geoip'
 UPSTREAM_GEOIP_URL = 'https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip.dat'
 INCY_ROUTING_PROFILES = (
     DIST / 'incy-routing.json',
@@ -127,18 +128,67 @@ def update_incy_timestamps() -> None:
         )
 
 
+def validate_incy_profiles() -> None:
+    geosite_codes = {
+        path.name.upper()
+        for path in SRC_GEOSITE.iterdir()
+        if path.is_file() and not path.name.startswith('.')
+    }
+    geoip_codes = {
+        path.stem.removesuffix('-ip').upper()
+        for path in SRC_GEOIP.iterdir()
+        if path.is_file() and not path.name.startswith('.')
+    }
+    # Categories supplied by the upstream production geoip.dat.
+    geoip_codes.update({'PRIVATE', 'TELEGRAM'})
+
+    route_fields = {
+        'DirectSites': ('geosite:', geosite_codes),
+        'ProxySites': ('geosite:', geosite_codes),
+        'BlockSites': ('geosite:', geosite_codes),
+        'DirectIp': ('geoip:', geoip_codes),
+        'ProxyIp': ('geoip:', geoip_codes),
+        'BlockIp': ('geoip:', geoip_codes),
+    }
+
+    for routing_profile in INCY_ROUTING_PROFILES:
+        profile = json.loads(routing_profile.read_text(encoding='utf-8'))
+        for field, (prefix, available_codes) in route_fields.items():
+            entries = profile.get(field)
+            if not isinstance(entries, list):
+                raise ValueError(f'{routing_profile}:{field} must be a list')
+            if len(entries) != len(set(entries)):
+                raise ValueError(f'{routing_profile}:{field} contains duplicates')
+            for entry in entries:
+                if not isinstance(entry, str):
+                    raise ValueError(f'{routing_profile}:{field} contains a non-string entry')
+                if entry.lower().startswith(prefix):
+                    code = entry.split(':', 1)[1].upper()
+                    if code not in available_codes:
+                        raise ValueError(
+                            f'{routing_profile}:{field} references missing {prefix}{code}'
+                        )
+
+        proxy_sites = set(profile['ProxySites'])
+        if {'geosite:MORDA-PROXY', 'geosite:MORDA-TT'} <= proxy_sites:
+            raise ValueError(
+                f'{routing_profile}:MORDA-TT is already merged into MORDA-PROXY'
+            )
+
+
 def main() -> None:
     DIST.mkdir(parents=True, exist_ok=True)
-    previous_hashes = {asset: file_sha256(asset) for asset in GEO_ASSETS}
 
     with tempfile.TemporaryDirectory(prefix='morda-geo-happ-') as tmp:
         build_geosite(Path(tmp))
         build_geoip()
 
-    current_hashes = {asset: file_sha256(asset) for asset in GEO_ASSETS}
     write_sha256_sidecars()
-    if current_hashes != previous_hashes:
-        update_incy_timestamps()
+    validate_incy_profiles()
+    # A workflow run means either routing sources, build logic, or a published
+    # profile changed. Always advance the profile version so installed clients
+    # can observe non-geodata changes such as DNS or route-list updates too.
+    update_incy_timestamps()
 
 
 if __name__ == '__main__':

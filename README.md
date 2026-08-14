@@ -4,6 +4,9 @@ Custom geo repository for Xray / RemnaWave / Happ routing rules.
 
 This repository publishes ready-to-use `geosite.dat` and `geoip.dat` files for clients that support custom geo assets.
 
+Production compatibility decisions for Russia, mainland China, DNS, Roblox, and
+Discord voice are recorded in [`ROUTING_POLICY.md`](ROUTING_POLICY.md).
+
 ## Production URLs
 
 Use these URLs in Happ / Xray-compatible clients:
@@ -38,7 +41,9 @@ These categories are built from `src/geosite/`:
 - `geosite:MORDA-DISCORD-EXTRA`
 - `geosite:MORDA-TT`
 
-`MORDA-TT` is also merged into `MORDA-PROXY` by the Happ-compatible build script, but it can still be included explicitly in client proxy rules.
+`MORDA-TT` is merged into `MORDA-PROXY` by the Happ-compatible build script.
+The standalone category remains available for compatibility, but production
+profiles should not reference both categories.
 
 ### GeoIP
 
@@ -49,9 +54,11 @@ These categories are intended for production routing:
 - `geoip:private`
 - `geoip:telegram`
 - `geoip:MORDA-BRAWLSTARS`
-- `geoip:MORDA-ROBLOX`
 - `geoip:MORDA-DISCORD`
 - `geoip:MORDA-OPENAI`
+
+`geoip:MORDA-ROBLOX` remains in the generated database for compatibility with
+older profiles, but it is not part of current production proxy routing.
 
 ## Recommended desktop Happ routing profile
 
@@ -61,11 +68,10 @@ These categories are intended for production routing:
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
   "DirectSites": ["geosite:MORDA-DIRECT"],
   "DirectIp": ["geoip:private"],
-  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-TT", "geosite:MORDA-DISCORD-EXTRA"],
+  "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
     "geoip:MORDA-BRAWLSTARS",
-    "geoip:MORDA-ROBLOX",
     "geoip:MORDA-DISCORD",
     "geoip:MORDA-OPENAI"
   ],
@@ -157,11 +163,12 @@ Current workflow triggers automatically for:
 ```text
 src/geosite/**
 src/geoip/**
+scripts/**
 build_morda_geo_happ.py
+dist/incy-routing.json
+dist/incy-routing-v2.json
 .github/workflows/build-happ-compatible-geo.yml
 ```
-
-If only `scripts/append_custom_geoip.py` is changed, run `build-happ-compatible-geo` manually from GitHub Actions, unless `scripts/**` is added to the workflow trigger first.
 
 ## Safe push checklist
 
