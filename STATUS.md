@@ -59,14 +59,15 @@ geosite:MORDA-DISCORD-EXTRA
 ```text
 geoip:private
 geoip:telegram
-geoip:MORDA-BRAWLSTARS
+geoip:facebook
+geoip:twitter
 geoip:MORDA-OPENAI
 ```
 
 `geoip:telegram` comes from the large production geoip base.
 
-`geoip:MORDA-ROBLOX` remains available only for compatibility with older
-profiles and is not referenced by current production routing.
+`geoip:MORDA-ROBLOX` and `geoip:MORDA-BRAWLSTARS` remain available only for
+compatibility with older profiles; neither is referenced by production routing.
 
 `geoip:MORDA-DISCORD` also remains available only for compatibility. Discord
 domains are still proxied, but the broad and frequently changing IP routing
@@ -89,7 +90,8 @@ src/geoip/morda-openai.txt
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
-    "geoip:MORDA-BRAWLSTARS",
+    "geoip:facebook",
+    "geoip:twitter",
     "geoip:MORDA-OPENAI"
   ],
   "BlockSites": ["geosite:MORDA-ADS"],
@@ -120,6 +122,9 @@ dist/geosite.dat around tens of KB
 8. Refresh geo files in Happ only after the workflow succeeded.
 
 ## Emergency checks after a rebuild
+
+The builder now validates actual binary category names (including `FACEBOOK` and
+`TWITTER`) and rejects a suspiciously small GeoIP asset.
 
 Check these before trusting a new build:
 
