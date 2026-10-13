@@ -53,12 +53,13 @@ These categories are intended for production routing:
 
 - `geoip:private`
 - `geoip:telegram`
-- `geoip:MORDA-BRAWLSTARS`
+- `geoip:facebook`
+- `geoip:twitter`
 - `geoip:MORDA-OPENAI`
 
-`geoip:MORDA-ROBLOX` and `geoip:MORDA-DISCORD` remain in the generated database
-for compatibility with older profiles, but they are not part of current
-production proxy routing. Discord domains remain proxied through the geosite
+`geoip:MORDA-ROBLOX`, `geoip:MORDA-DISCORD` and `geoip:MORDA-BRAWLSTARS`
+remain in the generated database for compatibility with older profiles, but are
+not referenced by new production profiles. Discord domains remain proxied through the geosite
 categories; only broad IP-based voice routing is disabled.
 
 ## Recommended desktop Happ routing profile
@@ -72,7 +73,8 @@ categories; only broad IP-based voice routing is disabled.
   "ProxySites": ["geosite:MORDA-PROXY", "geosite:MORDA-DISCORD-EXTRA"],
   "ProxyIp": [
     "geoip:telegram",
-    "geoip:MORDA-BRAWLSTARS",
+    "geoip:facebook",
+    "geoip:twitter",
     "geoip:MORDA-OPENAI"
   ],
   "BlockSites": ["geosite:MORDA-ADS"],
@@ -252,3 +254,19 @@ Telegram IP routing comes from the large production geoip base. Do not add a cus
 - Do not create duplicate category source files in `src/geoip/`.
 - Do not restore legacy builders such as `build_morda_geo.py` or `scripts/build.py`.
 - Wait for Actions to regenerate `dist/*.dat` before using new files in clients.
+
+## Routing cleanup (October 2026)
+
+- Active profiles proxy official Meta and X/Twitter networks through upstream
+  `geoip:facebook` and `geoip:twitter` to cover IP-only UDP destinations.
+- Discord/Roblox/Brawl Stars custom GeoIP categories remain in the binary for
+  old profiles but are not active; broad shared cloud ranges are unsafe.
+- `MORDA-TT` stays available for compatibility but is already merged into
+  `MORDA-PROXY` and should not be used twice in a profile.
+- `s.youtube.com` is no longer blocked while YouTube startup/buffering is being
+  evaluated. The other ad rules are unchanged.
+- Both INCY JSON URLs remain valid and use the same routing except for `Name`.
+- No scheduled upstream rebuilds: builds only after a source/profile change or
+  a manual GitHub Actions dispatch.
+- Before a production publish, the builder checks real compiled `.dat`
+  category names and refuses missing upstream/custom categories.
