@@ -32,6 +32,24 @@ details.
 - Do not re-add Roblox domains or IPs to active routing without a new, observed
   access problem.
 
+## Brawl Stars
+
+- `geoip:MORDA-BRAWLSTARS` stays in generated assets for legacy profile compatibility.
+- Do not activate its historical /32 cloud and Apple addresses in shared profiles;
+  they can proxy unrelated services. Domain-only Supercell routes remain for now.
+
+## Meta / Instagram / WhatsApp
+
+- Use the upstream `geoip:facebook` category in active profiles to route observed
+  IP-only Meta/Instagram UDP flows; keep primary service domains in MORDA-PROXY.
+- This category also covers other Meta services. Verify in Happ logs and avoid
+  adding broad Cloudflare/AWS/Google ranges to compensate for misses.
+
+## X / Twitter
+
+- Route official product domains and upstream `geoip:twitter` IP category.
+- Keep raw IP routing narrow and verify no unrelated traffic is caught.
+
 ## Discord voice
 
 - Discord web, gateway, media, and voice domains remain proxied.
@@ -54,6 +72,7 @@ details.
   after removing them from active profile references.
 - Advance `LastUpdated` whenever profiles, routing sources, or generated geo
   assets change so installed clients can refresh predictably.
-- Validate JSON parsing and category references before publishing.
+- Validate JSON parsing and real compiled `.dat` category references before publishing.
+- Preserve existing source categories and old profile URLs until legacy clients are migrated.
 - Let the production build workflow regenerate `dist/*.dat`; do not hand-edit
   generated binary assets.

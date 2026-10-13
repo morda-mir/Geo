@@ -128,19 +128,82 @@ def update_incy_timestamps() -> None:
         )
 
 
+def read_varint(data: bytes, start: int) -> tuple[int, int]:
+    value = 0
+    shift = 0
+    while start < len(data) and shift <= 63:
+        octet = data[start]
+        start += 1
+        value |= (octet & 0x7f) << shift
+        if not octet & 0x80:
+            return value, start
+        shift += 7
+    raise ValueError('Malformed protobuf varint')
+
+
+def compiled_category_codes(path: Path) -> set[str]:
+    # Both Xray GeoIPList and GeoSiteList use repeated entry=1;
+    # each entry stores its category code as the first string field=1.
+    payload = path.read_bytes()
+    codes: set[str] = set()
+    pos = 0
+    while pos < len(payload):
+        key, pos = read_varint(payload, pos)
+        field_number, wire_type = key >> 3, key & 7
+        if wire_type == 2:
+            length, pos = read_varint(payload, pos)
+            end = pos + length
+            if end > len(payload):
+                raise ValueError(f'{path}: malformed length-delimited field')
+            if field_number == 1:
+                inner = payload[pos:end]
+                inner_key, inner_pos = read_varint(inner, 0)
+                if inner_key != 10:
+                    raise ValueError(f'{path}: missing category name in entry')
+                name_size, inner_pos = read_varint(inner, inner_pos)
+                code = inner[inner_pos:inner_pos + name_size].decode('ascii').upper()
+                if not code:
+                    raise ValueError(f'{path}: empty category name')
+                if code in codes:
+                    raise ValueError(f'{path}: duplicate category {code}')
+                codes.add(code)
+            pos = end
+        elif wire_type == 0:
+            _, pos = read_varint(payload, pos)
+        elif wire_type in (1, 5):
+            pos += 8 if wire_type == 1 else 4
+        else:
+            raise ValueError(f'{path}: unsupported protobuf wire type {wire_type}')
+    return codes
+
+
 def validate_incy_profiles() -> None:
-    geosite_codes = {
-        path.name.upper()
-        for path in SRC_GEOSITE.iterdir()
-        if path.is_file() and not path.name.startswith('.')
+    # Validate the built .dat files, not just source filenames. This catches
+    # missing upstream categories (e.g. FACEBOOK/TWITTER) before publication.
+    if (DIST / 'geoip.dat').stat().st_size < 10 * 1024 * 1024:
+        raise ValueError('geoip.dat suspiciously small: upstream base may be missing')
+    if (DIST / 'geosite.dat').stat().st_size < 5 * 1024:
+        raise ValueError('geosite.dat suspiciously small')
+
+    geosite_codes = compiled_category_codes(DIST / 'geosite.dat')
+    geoip_codes = compiled_category_codes(DIST / 'geoip.dat')
+    required_geoip = {'PRIVATE', 'TELEGRAM', 'FACEBOOK', 'TWITTER'}
+    missing_base = required_geoip - geoip_codes
+    if missing_base:
+        raise ValueError(f'geoip.dat missing upstream categories: {sorted(missing_base)}')
+
+    custom_geosite = {p.name.upper() for p in SRC_GEOSITE.iterdir() if p.is_file() and not p.name.startswith('.')}
+    custom_geoip = {
+        p.stem.removesuffix('-ip').upper()
+        for p in SRC_GEOIP.iterdir() if p.is_file() and not p.name.startswith('.')
     }
-    geoip_codes = {
-        path.stem.removesuffix('-ip').upper()
-        for path in SRC_GEOIP.iterdir()
-        if path.is_file() and not path.name.startswith('.')
-    }
-    # Categories supplied by the upstream production geoip.dat.
-    geoip_codes.update({'PRIVATE', 'TELEGRAM'})
+    for label, expected, actual in (
+        ('geosite', custom_geosite, geosite_codes),
+        ('geoip', custom_geoip, geoip_codes),
+    ):
+        missing = expected - actual
+        if missing:
+            raise ValueError(f'{label}.dat missing custom categories: {sorted(missing)}')
 
     route_fields = {
         'DirectSites': ('geosite:', geosite_codes),

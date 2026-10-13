@@ -9,7 +9,7 @@ domain:googletagservices.com
 domain:google-analytics.com
 
 full:ads.youtube.com
-full:s.youtube.com
+# s.youtube.com is YouTube playback telemetry; do not block until tested for buffering regressions.
 full:youtubeanalytics.googleapis.com
 full:pagead2.googlesyndication.com
 full:googleads.g.doubleclick.net

@@ -26,6 +26,9 @@ domain:usercontent.dev
 domain:wa.me
 domain:whatsapp.com
 domain:whatsapp.net
+domain:whatsapp.org
+domain:whatsapp.info
+domain:whatsapp.tv
 
 # YouTube
 # core player + video CDN + assets needed for China/proxied clients
@@ -248,6 +251,33 @@ domain:fb.me
 domain:fb.watch
 domain:fbcdn.net
 domain:fbsbx.com
+domain:instagr.am
+domain:threads.com
+domain:threads.net
+domain:meta.com
+domain:atmeta.com
+
+# Other access-restricted social / messaging services
+# Small official-service domain sets; no shared hosting/cloud CIDRs.
+domain:x.com
+domain:twitter.com
+domain:twimg.com
+domain:twimg.co
+domain:t.co
+domain:twtrdns.net
+domain:signal.org
+domain:signal.me
+domain:signal.group
+domain:signal.link
+domain:bsky.app
+domain:bsky.social
+domain:bsky.network
+domain:snapchat.com
+domain:snap.com
+domain:sc-cdn.net
+domain:linkedin.com
+domain:licdn.com
+domain:lnkd.in
 
 # Discord / Developer Portal
 # app, web, CDN, gateway, voice/media and anti-abuse endpoints observed in Happ logs
@@ -334,6 +364,8 @@ domain:openai.com
 domain:sora.com
 domain:livekit.cloud
 domain:crixet.com
+domain:oaistatsig.com
+full:openaiassets.blob.core.windows.net
 domain:auth0.com
 domain:client-api.arkoselabs.com
 domain:datadoghq.com
@@ -435,6 +467,8 @@ domain:claude.ai
 domain:claude.com
 domain:claudeusercontent.com
 domain:claudemcpclient.com
+domain:claude.dev
+domain:claudemcpcontent.com
 full:servd-anthropic-website.b-cdn.net
 
 # AI billing / payments
@@ -497,6 +531,8 @@ full:labs.google.com
 domain:labs.google
 full:makersuite.google.com
 full:notebooklm.google.com
+domain:notebook.google
+domain:flow.google
 
 # restored legacy proxy rules (2026-05-23)
 
@@ -513,6 +549,8 @@ domain:coderabbit.ai
 domain:cohere.ai
 domain:cohere.com
 domain:copilot.microsoft.com
+domain:copilot.com
+domain:copilot.cloud.microsoft
 domain:coze.com
 domain:cursor.com
 domain:cursor.sh
@@ -575,3 +613,11 @@ full:proactivebackend-pa.googleapis.com
 full:robinfrontend-pa.googleapis.com
 full:stitch.withgoogle.com
 full:webchannel-alkalimakersuite-pa.clients6.google.com
+
+# Additional AI services: product domains only; no broad provider IP blocks.
+domain:arena.ai
+domain:midjourney.com
+domain:kimi.ai
+domain:moonshot.ai
+domain:suno.com
+domain:runwayml.com
