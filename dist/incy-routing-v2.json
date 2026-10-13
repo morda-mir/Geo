@@ -10,7 +10,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geoipurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/morda-mir/Geo/main/dist/geosite.dat",
-  "LastUpdated": "1791872816",
+  "LastUpdated": "1791875274",
   "DnsHosts": {
     "dns.google": "8.8.8.8"
   },
