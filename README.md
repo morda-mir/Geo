@@ -7,6 +7,16 @@ This repository publishes ready-to-use `geosite.dat` and `geoip.dat` files for c
 Production compatibility decisions for Russia, mainland China, DNS, Roblox, and
 Discord voice are recorded in [`ROUTING_POLICY.md`](ROUTING_POLICY.md).
 
+## RabbitHole / Mihomo providers
+
+Small, automatically updated Mihomo rule providers are published in
+[`dist/mihomo/`](dist/mihomo), using the same active categories as the shared
+INCY profile. They are exported from the existing compiled assets; the exporter
+does not modify Happ/INCY files or rebuild the large GeoIP database.
+
+See [`docs/mihomo.md`](docs/mihomo.md) for provider formats, routing semantics,
+the update workflow, and the required RabbitHole **Routing → Default** mode.
+
 ## Production URLs
 
 Use these URLs in Happ / Xray-compatible clients:

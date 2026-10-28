@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "routeOrder": "block-proxy-direct",
+  "defaultAction": "DIRECT",
+  "domainStrategy": "AsIs",
+  "categories": {
+    "BlockSites": [
+      "geosite:MORDA-ADS"
+    ],
+    "BlockIp": [],
+    "ProxySites": [
+      "geosite:MORDA-PROXY",
+      "geosite:MORDA-DISCORD-EXTRA"
+    ],
+    "ProxyIp": [
+      "geoip:telegram",
+      "geoip:facebook",
+      "geoip:twitter",
+      "geoip:MORDA-OPENAI"
+    ],
+    "DirectSites": [
+      "geosite:MORDA-DIRECT"
+    ],
+    "DirectIp": [
+      "geoip:private"
+    ]
+  },
+  "dns": {
+    "RemoteDNSDomain": "https://dns.google/dns-query",
+    "RemoteDNSIP": "8.8.8.8",
+    "DomesticDNSType": "DoU",
+    "DomesticDNSIP": "77.88.8.8"
+  },
+  "inputs": {
+    "geosite.dat": "bc7f3bba28498a6eb5f721d7f1f595f672551a7c87401a83668a877e3da45c13",
+    "geoip.dat": "66b6fb6aea81378f3b4dc263297363c87c194685348445ad2c38b8ccb07ee98e",
+    "incy-routing-v2.json": "911f31021f59d633e06b26e505afe3757a50184b0a8268722064342537c6afd7"
+  },
+  "files": {
+    "block-domains.txt": {
+      "rules": 21,
+      "bytes": 649,
+      "sha256": "965294e96be616cd0eea42dee233f316c4a7789999f97cb34af92ac9725f2362"
+    },
+    "proxy-domains.txt": {
+      "rules": 567,
+      "bytes": 16528,
+      "sha256": "46c57e4cf736c8e5cfeca28efcb15781f80d7cfd7f6a05753ae88bbeee8b29b7"
+    },
+    "direct-domains.txt": {
+      "rules": 169,
+      "bytes": 4562,
+      "sha256": "5d52d2c333831bd6e4e642c4849bb64841350eca229c5e01e44af447c963889d"
+    },
+    "proxy-ips.txt": {
+      "rules": 167,
+      "bytes": 2839,
+      "sha256": "c51228c601a6c7c49b004d1cead5ecc1caf979635fb0209f3ec11a896b296b92"
+    },
+    "direct-ips.txt": {
+      "rules": 18,
+      "bytes": 224,
+      "sha256": "46ec4df3a8811b8337a65673a3127d66d65babb18f4ca219540b3bf857da2f25"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+name: build-mihomo-routing
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'build_morda_mihomo.py'
+      - 'tests/test_mihomo.py'
+      - '.github/workflows/build-mihomo-routing.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'build_morda_mihomo.py'
+      - 'tests/test_mihomo.py'
+      - '.github/workflows/build-mihomo-routing.yml'
+  workflow_run:
+    workflows: [build-happ-compatible-geo]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+# Serialize with the existing asset writer; this workflow only writes dist/mihomo.
+concurrency:
+  group: geo-dist-main
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event != 'pull_request')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test conversion and export selected active categories
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 build_morda_mihomo.py
+          python3 build_morda_mihomo.py --check
+      - name: Commit generated Mihomo providers
+        if: github.event_name != 'pull_request'
+        run: |
+          if git diff --quiet -- dist/mihomo && [ -z "$(git ls-files --others --exclude-standard dist/mihomo)" ]; then
+            echo 'No Mihomo changes'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/mihomo
+          git commit -m 'build: refresh Mihomo routing providers [skip ci]'
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase origin main
+          done
+          echo 'Push failed after 3 attempts'
+          exit 1
