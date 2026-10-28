@@ -1,0 +1,2 @@
+# Keep generated provider bytes stable across Windows and CI checkouts.
+dist/mihomo/** text eol=lf

@@ -154,7 +154,10 @@ def build(root: Path = ROOT) -> dict[str, bytes]:
         manifest['files'][filename] = {'rules': len(rules), 'bytes': len(content),
                                        'sha256': hashlib.sha256(content).hexdigest()}
     for name in ('geosite.dat', 'geoip.dat', 'incy-routing-v2.json'):
-        manifest['inputs'][name] = hashlib.sha256((root / 'dist' / name).read_bytes()).hexdigest()
+        content = (root / 'dist' / name).read_bytes()
+        if name.endswith('.json'):
+            content = content.replace(b'\r\n', b'\n')
+        manifest['inputs'][name] = hashlib.sha256(content).hexdigest()
     outputs['manifest.json'] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
     return outputs
 

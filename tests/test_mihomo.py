@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import ipaddress
 import json
 from pathlib import Path
@@ -54,6 +55,8 @@ class ExportTests(unittest.TestCase):
         manifest = json.loads(first['manifest.json'])
         self.assertEqual(manifest['defaultAction'], 'DIRECT')
         self.assertEqual(manifest['routeOrder'], 'block-proxy-direct')
+        profile_bytes = inputs['incy-routing-v2.json'].replace(b'\r\n', b'\n')
+        self.assertEqual(manifest['inputs']['incy-routing-v2.json'], hashlib.sha256(profile_bytes).hexdigest())
         self.assertIn('geoip:facebook', manifest['categories']['ProxyIp'])
         self.assertIn('geoip:twitter', manifest['categories']['ProxyIp'])
         for removed in ('geoip:MORDA-ROBLOX', 'geoip:MORDA-DISCORD', 'geoip:MORDA-BRAWLSTARS'):
