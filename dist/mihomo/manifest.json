@@ -34,7 +34,7 @@
   "inputs": {
     "geosite.dat": "bc7f3bba28498a6eb5f721d7f1f595f672551a7c87401a83668a877e3da45c13",
     "geoip.dat": "66b6fb6aea81378f3b4dc263297363c87c194685348445ad2c38b8ccb07ee98e",
-    "incy-routing-v2.json": "911f31021f59d633e06b26e505afe3757a50184b0a8268722064342537c6afd7"
+    "incy-routing-v2.json": "8cea2b22be3445ff1cd81846c5c70e6dfdc87230c184808a729e6259157f34ef"
   },
   "files": {
     "block-domains.txt": {
